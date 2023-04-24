@@ -1,20 +1,16 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import 'onboard/onboarding1.dart';
+import 'screens/camera.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Motor Diary',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.purple),
-        home: const OnBoarding1());
-  }
+  runApp(MaterialApp(
+    home: CameraPage(camera: firstCamera),
+    debugShowCheckedModeBanner: false,
+  ));
 }

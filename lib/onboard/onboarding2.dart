@@ -18,6 +18,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Setup'),
           centerTitle: true,

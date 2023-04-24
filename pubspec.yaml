@@ -10,6 +10,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  camera:
+  path_provider:
+  path:
+
+  cupertino_icons: ^0.1.2
+  workmanager: ^0.2.3
+  flutter_local_notifications: ^1.4.4+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

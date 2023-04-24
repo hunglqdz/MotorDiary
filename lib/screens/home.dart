@@ -10,6 +10,40 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Home Page'));
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * .2,
+              decoration: const BoxDecoration(
+                  color: Colors.purple,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20))),
+              child: const Center(
+                child: Text(
+                  'Welcome back, master',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  const Text('Last Record'),
+                  Container(color: Colors.purple)
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
