@@ -30,7 +30,7 @@ class _BottomBarState extends State<BottomBar> {
       body: PageStorage(bucket: bucket, child: currentScreen),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
-          foregroundColor: Colors.purple,
+          foregroundColor: Colors.green,
           onPressed: () {},
           child: const Icon(Icons.camera_alt)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -57,11 +57,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(Icons.home,
                             color:
-                                currentTab == 0 ? Colors.purple : Colors.black),
+                                currentTab == 0 ? Colors.green : Colors.black),
                         Text('Home',
                             style: TextStyle(
                                 color: currentTab == 0
-                                    ? Colors.purple
+                                    ? Colors.green
                                     : Colors.black))
                       ],
                     ),
@@ -78,11 +78,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(Icons.calendar_month,
                             color:
-                                currentTab == 1 ? Colors.purple : Colors.black),
+                                currentTab == 1 ? Colors.green : Colors.black),
                         Text('Timeline',
                             style: TextStyle(
                                 color: currentTab == 1
-                                    ? Colors.purple
+                                    ? Colors.green
                                     : Colors.black))
                       ],
                     ),
@@ -104,11 +104,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(Icons.timeline,
                             color:
-                                currentTab == 2 ? Colors.purple : Colors.black),
+                                currentTab == 2 ? Colors.green : Colors.black),
                         Text('Graph',
                             style: TextStyle(
                                 color: currentTab == 2
-                                    ? Colors.purple
+                                    ? Colors.green
                                     : Colors.black))
                       ],
                     ),
@@ -125,11 +125,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(Icons.settings,
                             color:
-                                currentTab == 3 ? Colors.purple : Colors.black),
+                                currentTab == 3 ? Colors.green : Colors.black),
                         Text('Settings',
                             style: TextStyle(
                                 color: currentTab == 3
-                                    ? Colors.purple
+                                    ? Colors.green
                                     : Colors.black))
                       ],
                     ),

@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * .2,
               decoration: const BoxDecoration(
-                  color: Colors.purple,
+                  color: Colors.green,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20))),
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   const Text('Last Record'),
-                  Container(color: Colors.purple)
+                  Container(color: Colors.green)
                 ],
               ),
             )

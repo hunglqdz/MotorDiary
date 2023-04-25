@@ -21,7 +21,7 @@ class _SettingsPageState extends State<SettingsPage> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           margin: const EdgeInsets.all(10),
-          color: Colors.purple,
+          color: Colors.green,
           child: ListTile(
             onTap: () {},
             title: const Text('Master',
@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: Colors.white, fontWeight: FontWeight.w500)),
             trailing: const Icon(
               Icons.edit,
-              color: Colors.white,
+              color: Colors.green,
             ),
           ),
         ),
@@ -40,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple)),
+                  color: Colors.green)),
         ),
         Card(
           elevation: 4,
@@ -49,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: Column(children: <Widget>[
             ListTile(
-              leading: const Icon(Icons.motorcycle, color: Colors.purple),
+              leading: const Icon(Icons.motorcycle, color: Colors.green),
               title: const Text('Your Vehicles'),
               trailing: const Icon(Icons.arrow_right),
               onTap: () {},
@@ -61,7 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.grey,
             ),
             ListTile(
-              leading: const Icon(Icons.build, color: Colors.purple),
+              leading: const Icon(Icons.build, color: Colors.green),
               title: const Text('Predictor Settings'),
               trailing: const Icon(Icons.arrow_right),
               onTap: () {},
@@ -75,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple)),
+                  color: Colors.green)),
         ),
         SwitchListTile(
           title: const Text('Enable Notification'),
@@ -85,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage> {
               isEnabled = value;
             });
           },
-          secondary: const Icon(Icons.notifications, color: Colors.purple),
+          secondary: const Icon(Icons.notifications, color: Colors.green),
         )
       ],
     ));

@@ -62,7 +62,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                               builder: (context) => const BottomBar()));
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purple),
+                            backgroundColor: Colors.green),
                         child: const Text('SKIP'),
                       )),
                 ),
@@ -81,7 +81,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                         },
                         style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            backgroundColor: Colors.purple),
+                            backgroundColor: Colors.green),
                         child: const Icon(Icons.arrow_forward),
                       )),
                 ),

@@ -1,16 +1,28 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/onboard/onboarding1.dart';
 
-import 'screens/camera.dart';
-
+List<CameraDescription> cameras = [];
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error in fetching the cameras: $e');
+  }
+  runApp(const MyApp());
+}
 
-  final cameras = await availableCameras();
-  final firstCamera = cameras.first;
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  runApp(MaterialApp(
-    home: CameraPage(camera: firstCamera),
-    debugShowCheckedModeBanner: false,
-  ));
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Motor Diary',
+      theme: ThemeData(primarySwatch: Colors.green),
+      home: const OnBoarding1(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
 }
