@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -28,8 +29,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w500)),
             trailing: const Icon(
-              Icons.edit,
-              color: Colors.green,
+              CupertinoIcons.pen,
+              color: Colors.white,
             ),
           ),
         ),
@@ -61,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.grey,
             ),
             ListTile(
-              leading: const Icon(Icons.build, color: Colors.green),
+              leading: const Icon(CupertinoIcons.gauge, color: Colors.green),
               title: const Text('Predictor Settings'),
               trailing: const Icon(Icons.arrow_right),
               onTap: () {},
@@ -85,7 +86,7 @@ class _SettingsPageState extends State<SettingsPage> {
               isEnabled = value;
             });
           },
-          secondary: const Icon(Icons.notifications, color: Colors.green),
+          secondary: const Icon(CupertinoIcons.bell, color: Colors.green),
         )
       ],
     ));

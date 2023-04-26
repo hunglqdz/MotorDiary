@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding3.dart';
 
@@ -31,7 +32,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
               description: "Configure your vehicle"),
           DropdownButton(
             value: dropdownValue,
-            icon: const Icon(Icons.arrow_drop_down),
+            icon: const Icon(CupertinoIcons.arrowtriangle_down_circle),
             items: items.map((String items) {
               return DropdownMenuItem(value: items, child: Text(items));
             }).toList(),
@@ -46,7 +47,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
             child: TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.oil_barrel),
+                suffixIcon: Icon(CupertinoIcons.drop),
                 border: OutlineInputBorder(),
                 labelText: 'Time for Oil change (day)',
               ),
@@ -57,7 +58,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
             child: TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.oil_barrel),
+                suffixIcon: Icon(CupertinoIcons.drop),
                 border: OutlineInputBorder(),
                 labelText: 'Distance for Oil change (km)',
               ),
@@ -68,7 +69,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
             child: TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.build),
+                suffixIcon: Icon(CupertinoIcons.wrench),
                 border: OutlineInputBorder(),
                 labelText: 'Time for Management (day)',
               ),
@@ -79,7 +80,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
             child: TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.build),
+                suffixIcon: Icon(CupertinoIcons.wrench),
                 border: OutlineInputBorder(),
                 labelText: 'Distance for Management (km)',
               ),
@@ -119,7 +120,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
                       style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),
                           backgroundColor: Colors.green),
-                      child: const Icon(Icons.arrow_forward),
+                      child: const Icon(CupertinoIcons.arrow_right),
                     )),
               ),
             ],

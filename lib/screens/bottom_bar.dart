@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/screens/camera.dart';
 
 import 'graph.dart';
 import 'home.dart';
@@ -31,8 +33,11 @@ class _BottomBarState extends State<BottomBar> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           foregroundColor: Colors.green,
-          onPressed: () {},
-          child: const Icon(Icons.camera_alt)),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const CameraScreen()));
+          },
+          child: const Icon(CupertinoIcons.camera)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -55,7 +60,7 @@ class _BottomBarState extends State<BottomBar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.home,
+                        Icon(CupertinoIcons.home,
                             color:
                                 currentTab == 0 ? Colors.green : Colors.black),
                         Text('Home',
@@ -76,7 +81,7 @@ class _BottomBarState extends State<BottomBar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.calendar_month,
+                        Icon(CupertinoIcons.calendar,
                             color:
                                 currentTab == 1 ? Colors.green : Colors.black),
                         Text('Timeline',
@@ -102,7 +107,7 @@ class _BottomBarState extends State<BottomBar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.timeline,
+                        Icon(CupertinoIcons.chart_bar,
                             color:
                                 currentTab == 2 ? Colors.green : Colors.black),
                         Text('Graph',
@@ -123,7 +128,7 @@ class _BottomBarState extends State<BottomBar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.settings,
+                        Icon(CupertinoIcons.gear,
                             color:
                                 currentTab == 3 ? Colors.green : Colors.black),
                         Text('Settings',

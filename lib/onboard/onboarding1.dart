@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding2.dart';
 
@@ -31,7 +32,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
               child: TextField(
                 maxLength: 30,
                 decoration: InputDecoration(
-                  suffixIcon: Icon(Icons.person),
+                  suffixIcon: Icon(CupertinoIcons.person),
                   border: OutlineInputBorder(),
                   labelText: 'Your Name',
                 ),
@@ -82,7 +83,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                         style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
                             backgroundColor: Colors.green),
-                        child: const Icon(Icons.arrow_forward),
+                        child: const Icon(CupertinoIcons.arrow_right),
                       )),
                 ),
               ],

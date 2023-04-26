@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/onboard/onboarding1.dart';
+import 'package:motor_diary/welcome/welcome.dart';
 
 List<CameraDescription> cameras = [];
 Future<void> main() async {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Motor Diary',
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const OnBoarding1(),
+      home: const WelcomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
