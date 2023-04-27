@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/bottom_bar.dart';
+import '../widgets/bottom_bar.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});

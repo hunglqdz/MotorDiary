@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/screens/bottom_bar.dart';
+import 'package:motor_diary/widgets/bottom_bar.dart';
 
 import 'onboard_content.dart';
 

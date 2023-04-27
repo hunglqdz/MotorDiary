@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding3.dart';
 
-import '../screens/bottom_bar.dart';
+import '../widgets/bottom_bar.dart';
 import 'onboard_content.dart';
 
 class OnBoarding2 extends StatefulWidget {
