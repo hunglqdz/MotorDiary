@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/onboard/onboarding1.dart';
+import 'package:camera/camera.dart';
+import 'package:motor_diary/widgets/bottom_bar.dart';
 
-import 'screens/locator.dart';
+List<CameraDescription>? cameras;
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupLocator();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Motor Diary',
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const OnBoarding1(),
+      home: BottomBar(cameras),
       debugShowCheckedModeBanner: false,
     );
   }

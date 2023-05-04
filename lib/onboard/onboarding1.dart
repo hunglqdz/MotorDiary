@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/main.dart';
 import 'package:motor_diary/onboard/onboarding2.dart';
 
 import '../widgets/bottom_bar.dart';
@@ -60,7 +61,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const BottomBar()));
+                              builder: (context) => BottomBar(cameras)));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green),

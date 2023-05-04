@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/bottom_bar.dart';
+import 'package:motor_diary/onboard/onboarding1.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -22,7 +21,7 @@ class WelcomePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const BottomBar()));
+                              builder: (context) => const OnBoarding1()));
                     },
                     child: const Text(
                       'SKIP',

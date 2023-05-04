@@ -1,28 +1,68 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
 
-class CameraService {
-  CameraController? cameraController;
+class CameraPage extends StatefulWidget {
+  List<CameraDescription> cameras;
+  CameraPage(this.cameras, {super.key});
 
-  Future<void> initialize() async {
-    if (cameraController != null) return;
-    CameraDescription description = await getCameraDescription();
-    await setupCameraController(description: description);
+  @override
+  State<CameraPage> createState() => _CameraPageState();
+}
+
+class _CameraPageState extends State<CameraPage> {
+  CameraController? controller;
+  String imagePath = '';
+
+  @override
+  void initState() {
+    super.initState();
+    controller = CameraController(widget.cameras[0], ResolutionPreset.high);
+    controller?.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
-  Future<CameraDescription> getCameraDescription() async {
-    List<CameraDescription> cameras = await availableCameras();
-    return cameras.firstWhere((CameraDescription camera) =>
-        camera.lensDirection == CameraLensDirection.front);
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
-  Future setupCameraController({required CameraDescription description}) async {
-    cameraController = CameraController(description, ResolutionPreset.high,
-        enableAudio: false);
-    await cameraController?.initialize();
-  }
-
-  dispose() async {
-    await cameraController?.dispose();
-    cameraController = null;
+  @override
+  Widget build(BuildContext context) {
+    if (!controller!.value.isInitialized) {
+      return Container();
+    }
+    return Scaffold(
+      body: SafeArea(
+          child: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 50),
+            SizedBox(
+                width: 200,
+                height: 200,
+                child: AspectRatio(
+                    aspectRatio: controller!.value.aspectRatio,
+                    child: CameraPreview(controller!))),
+            TextButton(
+                onPressed: () async {
+                  try {
+                    final image = await controller!.takePicture();
+                    setState(() {
+                      imagePath = image.path;
+                    });
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+                child: const Text('Take Photo')),
+          ],
+        ),
+      )),
+    );
   }
 }

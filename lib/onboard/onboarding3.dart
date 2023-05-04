@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/main.dart';
 import 'package:motor_diary/widgets/bottom_bar.dart';
 
 import 'onboard_content.dart';
@@ -33,7 +34,7 @@ class _OnBoarding3State extends State<OnBoarding3> {
             child: const Text('Click here'),
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const BottomBar()));
+                  MaterialPageRoute(builder: (context) => BottomBar(cameras)));
             },
           )
         ]),

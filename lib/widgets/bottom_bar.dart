@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/camera_screen.dart';
+import '../screens/camera.dart';
 import '../screens/graph.dart';
 import '../screens/home.dart';
 import '../screens/settings.dart';
 import '../screens/timeline.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+  var cameras;
+  BottomBar(this.cameras, {super.key});
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -34,8 +35,10 @@ class _BottomBarState extends State<BottomBar> {
           backgroundColor: Colors.black,
           foregroundColor: Colors.green,
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CameraScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CameraPage(widget.cameras)));
           },
           child: const Icon(CupertinoIcons.camera)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
