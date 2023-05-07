@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding1.dart';
+import 'package:motor_diary/widgets/bottom_bar.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -13,20 +14,6 @@ class WelcomePage extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            const SizedBox(height: 15),
-            Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const OnBoarding1()));
-                    },
-                    child: const Text(
-                      'SKIP',
-                      style: TextStyle(color: Colors.green, fontSize: 20),
-                    ))),
             const SizedBox(height: 50),
             Padding(
                 padding: const EdgeInsets.all(20),
@@ -41,7 +28,7 @@ class WelcomePage extends StatelessWidget {
                   letterSpacing: 1,
                   wordSpacing: 2),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 50),
             const Text(
               'Manage your private vehicles',
               style: TextStyle(
@@ -50,6 +37,36 @@ class WelcomePage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1,
                   wordSpacing: 2),
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const OnBoarding1()));
+                        },
+                        child: const Text(
+                          'SET UP',
+                          style: TextStyle(color: Colors.green, fontSize: 20),
+                        ))),
+                const Spacer(),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BottomBar()));
+                        },
+                        child: const Text(
+                          'SKIP',
+                          style: TextStyle(color: Colors.green, fontSize: 20),
+                        ))),
+              ],
             ),
           ],
         ),

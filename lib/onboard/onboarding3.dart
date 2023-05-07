@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/main.dart';
-import 'package:motor_diary/widgets/bottom_bar.dart';
-
+import 'package:motor_diary/screens/camera.dart';
 import 'onboard_content.dart';
 
 class OnBoarding3 extends StatefulWidget {
@@ -16,7 +14,7 @@ class _OnBoarding3State extends State<OnBoarding3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Setup'),
+        title: const Text('SET UP'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -30,13 +28,22 @@ class _OnBoarding3State extends State<OnBoarding3> {
               width: MediaQuery.of(context).size.width,
               child: Image.asset('assets/odometer.png')),
           const Spacer(),
-          ElevatedButton(
-            child: const Text('Click here'),
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => BottomBar(cameras)));
-            },
-          )
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
+                height: 60,
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            TakePictureScreen(camera: )));
+                  },
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  child: const Text('TAKE PHOTO'),
+                )),
+          ),
         ]),
       ),
     );

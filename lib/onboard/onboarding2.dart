@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding3.dart';
 
-import '../main.dart';
 import '../widgets/bottom_bar.dart';
 import 'onboard_content.dart';
 
@@ -22,7 +21,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text('Setup'),
+          title: const Text('SET UP'),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -98,7 +97,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => BottomBar(cameras)));
+                            builder: (context) => const BottomBar()));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green),

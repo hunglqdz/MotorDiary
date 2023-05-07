@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:motor_diary/widgets/bottom_bar.dart';
-
-List<CameraDescription>? cameras;
+import 'dart:async';
+import 'welcome/welcome.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+
   runApp(const MyApp());
 }
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Motor Diary',
       theme: ThemeData(primarySwatch: Colors.green),
-      home: BottomBar(cameras),
+      home: const WelcomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

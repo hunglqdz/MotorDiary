@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
                     bottomRight: Radius.circular(20))),
             child: const Center(
               child: Text(
-                'Welcome back, master',
+                'Welcome back',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
