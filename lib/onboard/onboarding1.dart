@@ -13,17 +13,6 @@ class OnBoarding1 extends StatefulWidget {
 }
 
 class _OnBoarding1State extends State<OnBoarding1> {
-  var name;
-  final nameController = TextEditingController();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    super.dispose();
-  }
-
-  void updateText() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +27,11 @@ class _OnBoarding1State extends State<OnBoarding1> {
                 image: 'assets/illustration.jpg',
                 title: 'Step 1/3',
                 description: "Enter your name and your vehicle's name"),
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: TextField(
-                controller: nameController,
                 maxLength: 30,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   suffixIcon: Icon(CupertinoIcons.person),
                   border: OutlineInputBorder(),
                   labelText: 'Your Name',

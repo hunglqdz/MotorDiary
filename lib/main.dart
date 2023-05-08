@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
-import 'dart:async';
 import 'welcome/welcome.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final cameras = await availableCameras();
-  final firstCamera = cameras.first;
-
+void main() {
   runApp(const MyApp());
 }
 

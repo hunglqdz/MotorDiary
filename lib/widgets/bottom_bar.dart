@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/screens/camera.dart';
 
+import '../camera.dart';
 import '../screens/graph.dart';
 import '../screens/home.dart';
 import '../screens/settings.dart';
@@ -17,14 +17,18 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int currentTab = 0;
   final List<Widget> screens = [
-    const HomePage(),
+    const HomePage(
+      imagePath: '',
+    ),
     const TimelinePage(),
     const GraphPage(),
     const SettingsPage()
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const HomePage();
+  Widget currentScreen = const HomePage(
+    imagePath: '',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +38,8 @@ class _BottomBarState extends State<BottomBar> {
           backgroundColor: Colors.black,
           foregroundColor: Colors.green,
           onPressed: () {
-            Navigator.of(context).push(
-                
-                MaterialPageRoute(
-                    builder: (context) => TakePictureScreen(
-                          camera: ,
-                        )));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const CameraScreen()));
           },
           child: const Icon(CupertinoIcons.camera)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -57,7 +57,9 @@ class _BottomBarState extends State<BottomBar> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = const HomePage();
+                        currentScreen = const HomePage(
+                          imagePath: '',
+                        );
                         currentTab = 0;
                       });
                     },

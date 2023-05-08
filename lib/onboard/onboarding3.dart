@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/screens/camera.dart';
+import 'package:motor_diary/camera.dart';
 import 'onboard_content.dart';
 
 class OnBoarding3 extends StatefulWidget {
@@ -35,9 +35,10 @@ class _OnBoarding3State extends State<OnBoarding3> {
                 width: 150,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            TakePictureScreen(camera: )));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CameraScreen()));
                   },
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.green),
