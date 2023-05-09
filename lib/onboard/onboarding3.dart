@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/camera.dart';
+import '../widgets/bottom_bar.dart';
 import 'onboard_content.dart';
 
 class OnBoarding3 extends StatefulWidget {
@@ -28,22 +29,41 @@ class _OnBoarding3State extends State<OnBoarding3> {
               width: MediaQuery.of(context).size.width,
               child: Image.asset('assets/odometer.png')),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: SizedBox(
-                height: 60,
-                width: 150,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CameraScreen()));
-                  },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  child: const Text('TAKE PHOTO'),
-                )),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                    height: 60,
+                    width: 100,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const BottomBar()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green),
+                      child: const Text('SKIP'),
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                    height: 60,
+                    width: 150,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CameraScreen()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green),
+                      child: const Text('TAKE PHOTO'),
+                    )),
+              ),
+            ],
           ),
         ]),
       ),

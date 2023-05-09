@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../main.dart';
+import '../predictor.dart';
+import '../vehicle.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -13,6 +18,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final myTextFieldValue = Provider.of<MyTextFieldValue>(context);
+
     return SafeArea(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,8 +32,8 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.green,
           child: ListTile(
             onTap: () {},
-            title: const Text('Master',
-                style: TextStyle(
+            title: Text(myTextFieldValue.text,
+                style: const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w500)),
             trailing: const Icon(
               CupertinoIcons.pen,
@@ -53,7 +60,12 @@ class _SettingsPageState extends State<SettingsPage> {
               leading: const Icon(Icons.motorcycle, color: Colors.green),
               title: const Text('Your Vehicles'),
               trailing: const Icon(Icons.arrow_right),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const VehicleSetting()));
+              },
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -65,7 +77,12 @@ class _SettingsPageState extends State<SettingsPage> {
               leading: const Icon(CupertinoIcons.gauge, color: Colors.green),
               title: const Text('Predictor Settings'),
               trailing: const Icon(Icons.arrow_right),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PredictorSetting()));
+              },
             ),
           ]),
         ),

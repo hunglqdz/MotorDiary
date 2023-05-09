@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/main.dart';
 import 'package:motor_diary/onboard/onboarding2.dart';
-
+import 'package:provider/provider.dart';
 import '../widgets/bottom_bar.dart';
 import 'onboard_content.dart';
 
@@ -13,6 +14,13 @@ class OnBoarding1 extends StatefulWidget {
 }
 
 class _OnBoarding1State extends State<OnBoarding1> {
+  final myController = TextEditingController();
+
+  void onSubmit(context) {
+    Provider.of<MyTextFieldValue>(context, listen: false)
+        .setText(myController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +35,12 @@ class _OnBoarding1State extends State<OnBoarding1> {
                 image: 'assets/illustration.jpg',
                 title: 'Step 1/3',
                 description: "Enter your name and your vehicle's name"),
-            const Padding(
-              padding: EdgeInsets.all(10),
+            Padding(
+              padding: const EdgeInsets.all(10),
               child: TextField(
+                controller: myController,
                 maxLength: 30,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   suffixIcon: Icon(CupertinoIcons.person),
                   border: OutlineInputBorder(),
                   labelText: 'Your Name',
@@ -75,6 +84,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                       width: 60,
                       child: ElevatedButton(
                         onPressed: () {
+                          onSubmit(context);
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return const OnBoarding2();
