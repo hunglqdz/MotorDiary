@@ -13,7 +13,7 @@ class OnBoarding2 extends StatefulWidget {
 }
 
 class _OnBoarding2State extends State<OnBoarding2> {
-  String dropdownValue = 'Vision';
+  String dropdownValue = 'Customize';
   TextEditingController textController1 = TextEditingController();
   TextEditingController textController2 = TextEditingController();
   TextEditingController textController3 = TextEditingController();
@@ -42,7 +42,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
               'Dream',
               'AirBlade',
               'Yamaha',
-              'Other...'
+              'Customize'
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(value: value, child: Text(value));
             }).toList(),
@@ -74,7 +74,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
                   textController2.text = '5000';
                   textController3.text = '500';
                   textController4.text = '5000';
-                } else if (dropdownValue == 'Other...') {
+                } else if (dropdownValue == 'Customize') {
                   textController1.text = '';
                   textController2.text = '';
                   textController3.text = '';

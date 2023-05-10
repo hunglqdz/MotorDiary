@@ -26,26 +26,12 @@ class _OnBoarding3State extends State<OnBoarding3> {
               description: "Take your first odometer"),
           const Spacer(),
           SizedBox(
+              height: 100,
               width: MediaQuery.of(context).size.width,
               child: Image.asset('assets/odometer.png')),
           const Spacer(),
-          Row(
+          Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                    height: 60,
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const BottomBar()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
-                      child: const Text('SKIP'),
-                    )),
-              ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(
@@ -61,6 +47,21 @@ class _OnBoarding3State extends State<OnBoarding3> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green),
                       child: const Text('TAKE PHOTO'),
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                    height: 60,
+                    width: 100,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const BottomBar()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green),
+                      child: const Text('SKIP'),
                     )),
               ),
             ],

@@ -47,7 +47,7 @@ class _CameraScreenState extends State<CameraScreen> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: getImage,
-              child: const Text('Take Picture'),
+              child: const Text('TAKE PHOTO'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(

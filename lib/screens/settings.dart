@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
-import '../predictor.dart';
 import '../vehicle.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -77,12 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
               leading: const Icon(CupertinoIcons.gauge, color: Colors.green),
               title: const Text('Predictor Settings'),
               trailing: const Icon(Icons.arrow_right),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PredictorSetting()));
-              },
+              onTap: () {},
             ),
           ]),
         ),
