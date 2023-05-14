@@ -14,17 +14,11 @@ class OnBoarding1 extends StatefulWidget {
 }
 
 class _OnBoarding1State extends State<OnBoarding1> {
-  final myController1 = TextEditingController();
-  final myController2 = TextEditingController();
+  final myController = TextEditingController();
 
-  void onSubmit1(context) {
+  void onSubmit(context) {
     Provider.of<MyTextFieldValue>(context, listen: false)
-        .setText(myController1.text);
-  }
-
-  void onSubmit2(context) {
-    Provider.of<MyTextFieldValue>(context, listen: false)
-        .setText(myController2.text);
+        .setText(myController.text);
   }
 
   @override
@@ -44,7 +38,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextField(
-                controller: myController1,
+                controller: myController,
                 maxLength: 30,
                 decoration: const InputDecoration(
                   suffixIcon: Icon(CupertinoIcons.person),
@@ -53,12 +47,11 @@ class _OnBoarding1State extends State<OnBoarding1> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: TextField(
-                controller: myController2,
                 maxLength: 30,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   suffixIcon: Icon(Icons.motorcycle),
                   border: OutlineInputBorder(),
                   labelText: "Your Vehicle's Name",
@@ -91,8 +84,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                       width: 60,
                       child: ElevatedButton(
                         onPressed: () {
-                          onSubmit1(context);
-                          onSubmit2(context);
+                          onSubmit(context);
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return const OnBoarding2();

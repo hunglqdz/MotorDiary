@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'main.dart';
 
 class VehicleSetting extends StatefulWidget {
   const VehicleSetting({super.key});
@@ -20,8 +17,6 @@ class _VehicleSettingState extends State<VehicleSetting> {
 
   @override
   Widget build(BuildContext context) {
-    final myTextFieldValue = Provider.of<MyTextFieldValue>(context);
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
@@ -35,9 +30,6 @@ class _VehicleSettingState extends State<VehicleSetting> {
               color: Colors.green,
               child: ListTile(
                 onTap: () {},
-                title: Text(myTextFieldValue.text,
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w500)),
                 trailing: const Icon(
                   CupertinoIcons.pen,
                   color: Colors.white,
