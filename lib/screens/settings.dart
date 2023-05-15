@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
-import '../vehicle.dart';
+import '../settings/vehicle.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

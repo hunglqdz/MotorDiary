@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/timeline/completed_events.dart';
+import 'package:motor_diary/timeline/missing_events.dart';
+import 'package:motor_diary/timeline/upcoming_events.dart';
 
 class TimelinePage extends StatefulWidget {
   const TimelinePage({super.key});
@@ -10,9 +13,9 @@ class TimelinePage extends StatefulWidget {
 class _TimelinePageState extends State<TimelinePage> {
   int index = 0;
   final eventTypes = [
-    const Center(child: Text('Upcoming')),
-    const Center(child: Text('Completed')),
-    const Center(child: Text('Missing'))
+    const UpcomingEvents(),
+    const CompletedEvents(),
+    const MissingEvents()
   ];
 
   @override
@@ -43,9 +46,16 @@ class _TimelinePageState extends State<TimelinePage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 25),
                       decoration: BoxDecoration(
+                        color: index == 0 ? Colors.green : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Text('Upcoming'),
+                      child: Text(
+                        'Upcoming',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: index == 0 ? Colors.white : Colors.black38),
+                      ),
                     ),
                   ),
                   InkWell(
@@ -58,9 +68,16 @@ class _TimelinePageState extends State<TimelinePage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 25),
                       decoration: BoxDecoration(
+                        color: index == 1 ? Colors.green : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Text('Completed'),
+                      child: Text(
+                        'Completed',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: index == 1 ? Colors.white : Colors.black38),
+                      ),
                     ),
                   ),
                   InkWell(
@@ -73,14 +90,23 @@ class _TimelinePageState extends State<TimelinePage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 25),
                       decoration: BoxDecoration(
+                        color: index == 2 ? Colors.green : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Text('Missing'),
+                      child: Text(
+                        'Missing',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: index == 2 ? Colors.white : Colors.black38),
+                      ),
                     ),
                   ),
                 ],
               ),
-            )
+            ),
+            const SizedBox(height: 30),
+            eventTypes[index],
           ],
         ),
       ),
