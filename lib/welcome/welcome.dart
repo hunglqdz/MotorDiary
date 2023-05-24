@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding1.dart';
-import 'package:motor_diary/widgets/bottom_bar.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -53,19 +52,19 @@ class WelcomePage extends StatelessWidget {
                           style: TextStyle(color: Colors.green, fontSize: 20),
                         ))),
                 const Spacer(),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const BottomBar()));
-                        },
-                        child: const Text(
-                          'SKIP',
-                          style: TextStyle(color: Colors.green, fontSize: 20),
-                        ))),
+                // Align(
+                //     alignment: Alignment.centerRight,
+                //     child: TextButton(
+                //         onPressed: () {
+                //           Navigator.push(
+                //               context,
+                //               MaterialPageRoute(
+                //                   builder: (context) => const BottomBar()));
+                //         },
+                //         child: const Text(
+                //           'SKIP',
+                //           style: TextStyle(color: Colors.green, fontSize: 20),
+                //         ))),
               ],
             ),
           ],

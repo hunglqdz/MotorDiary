@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/onboard/onboarding3.dart';
 
-import '../widgets/bottom_bar.dart';
 import 'onboard_content.dart';
 
 class OnBoarding2 extends StatefulWidget {
@@ -134,21 +133,21 @@ class _OnBoarding2State extends State<OnBoarding2> {
           const Spacer(),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                    height: 60,
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const BottomBar()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
-                      child: const Text('SKIP'),
-                    )),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(10),
+              //   child: SizedBox(
+              //       height: 60,
+              //       width: 100,
+              //       child: ElevatedButton(
+              //         onPressed: () {
+              //           Navigator.of(context).push(MaterialPageRoute(
+              //               builder: (context) => const BottomBar()));
+              //         },
+              //         style: ElevatedButton.styleFrom(
+              //             backgroundColor: Colors.green),
+              //         child: const Text('SKIP'),
+              //       )),
+              // ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(10),

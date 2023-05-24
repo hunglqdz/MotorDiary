@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/camera.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/bottom_bar.dart';
 import 'onboard_content.dart';
 
@@ -55,13 +56,16 @@ class _OnBoarding3State extends State<OnBoarding3> {
                     height: 60,
                     width: 100,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setBool('is_setup_complete', true);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const BottomBar()));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green),
-                      child: const Text('SKIP'),
+                      child: const Text('DONE'),
                     )),
               ),
             ],

@@ -36,77 +36,90 @@ class _HomePageState extends State<HomePage> {
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 22),
+                      fontSize: 25),
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Last Record'),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Text('01 Jan 2023'),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.lightGreenAccent,
+                    border: Border.all(color: Colors.green, width: 5),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
+                        child: Text(
+                          'Last Record',
+                          style: TextStyle(fontSize: 18),
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Text('12345'),
-                        )
-                      ],
-                    )
-                  ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text('01 Jan 2023'),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text('12345'),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Estimated'),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Text('14 May 2023'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green, width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
+                        child: Text(
+                          'Estimated',
+                          style: TextStyle(fontSize: 18),
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Text('23456'),
-                        )
-                      ],
-                    )
-                  ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text('14 May 2023'),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text('23456'),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            const Divider(),
             Container(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -114,7 +127,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Padding(
                     padding: EdgeInsets.all(10),
-                    child: Text('Pending Events'),
+                    child: Text(
+                      'Pending Events',
+                      style: TextStyle(fontSize: 25),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   InkWell(
@@ -134,8 +150,11 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text('Oil Change'),
+                            padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
+                            child: Text(
+                              'Oil Change',
+                              style: TextStyle(fontSize: 18),
+                            ),
                           ),
                           Row(
                             children: [
@@ -168,8 +187,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: EdgeInsets.all(10),
                                     child: Text(
-                                      'At (km): 34567',
-                                      style: TextStyle(color: Colors.grey),
+                                      '34567',
                                     ),
                                   ),
                                 ],
@@ -198,12 +216,16 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text('Maintenance'),
+                            padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
+                            child: Text(
+                              'Maintenance',
+                              style: TextStyle(fontSize: 18),
+                            ),
                           ),
                           Row(
                             children: [
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.all(10),
@@ -232,8 +254,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: EdgeInsets.all(10),
                                     child: Text(
-                                      'At (km): 34567',
-                                      style: TextStyle(color: Colors.grey),
+                                      '34567',
                                     ),
                                   ),
                                 ],

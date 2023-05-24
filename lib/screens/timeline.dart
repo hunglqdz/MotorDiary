@@ -44,7 +44,7 @@ class _TimelinePageState extends State<TimelinePage> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 25),
+                          vertical: 12, horizontal: 20),
                       decoration: BoxDecoration(
                         color: index == 0 ? Colors.green : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
@@ -66,7 +66,7 @@ class _TimelinePageState extends State<TimelinePage> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 25),
+                          vertical: 12, horizontal: 20),
                       decoration: BoxDecoration(
                         color: index == 1 ? Colors.green : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
@@ -88,7 +88,7 @@ class _TimelinePageState extends State<TimelinePage> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 25),
+                          vertical: 12, horizontal: 20),
                       decoration: BoxDecoration(
                         color: index == 2 ? Colors.green : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
