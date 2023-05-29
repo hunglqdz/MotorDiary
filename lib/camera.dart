@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:motor_diary/widgets/bottom_bar.dart';
+import 'package:tflite/tflite.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -13,23 +13,40 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen> {
   File? _image;
+  String _result = '';
 
-  Future<void> getImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  Future<void> _getImage() async {
+    var image = await ImagePicker().pickImage(source: ImageSource.camera);
 
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
+    if (image == null) return;
+
+    final List? recognitions = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 1,
+      threshold: 0.5,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+
+    setState(() {
+      _image = File(image.path);
+      _result = recognitions![0]['label'];
+    });
   }
 
-  void navigateToNextPage() {
-    if (_image != null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const BottomBar()));
-    }
+  @override
+  void initState() {
+    super.initState();
+    Tflite.loadModel(
+      model: 'assets/detect.tflite',
+      labels: 'assets/labelmap.txt',
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Tflite.close();
   }
 
   @override
@@ -41,46 +58,28 @@ class _CameraScreenState extends State<CameraScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            if (_image != null) Image.file(_image!),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: getImage,
-              child: const Text('TAKE PHOTO'),
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: navigateToNextPage,
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NextPage extends StatelessWidget {
-  final File image;
-
-  const NextPage({Key? key, required this.image}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Next Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.file(image),
-            const SizedBox(height: 16.0),
-            const Text('You can now do whatever you want with the image.'),
+            if (_image != null) ...[
+              Image.file(_image!),
+              const SizedBox(height: 20),
+              Text(
+                'Result: $_result',
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ] else ...[
+              const Text(
+                'Take a picture',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ],
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _getImage,
+        tooltip: 'Take Picture',
+        child: const Icon(Icons.camera_alt),
       ),
     );
   }

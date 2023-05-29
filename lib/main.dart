@@ -6,6 +6,7 @@ import 'welcome/welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   bool isSetupComplete = prefs.getBool('is_setup_complete') ?? false;

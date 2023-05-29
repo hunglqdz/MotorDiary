@@ -40,7 +40,7 @@ class _OnBoarding3State extends State<OnBoarding3> {
                     width: 150,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const CameraScreen()));

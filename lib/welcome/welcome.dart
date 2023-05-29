@@ -22,14 +22,14 @@ class WelcomePage extends StatelessWidget {
               'Motor Diary',
               style: TextStyle(
                   color: Colors.green,
-                  fontSize: 35,
+                  fontSize: 50,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1,
                   wordSpacing: 2),
             ),
             const SizedBox(height: 50),
             const Text(
-              'Manage your private vehicles',
+              'Manage your private vehicles :3',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -38,35 +38,17 @@ class WelcomePage extends StatelessWidget {
                   wordSpacing: 2),
             ),
             const Spacer(),
-            Row(
-              children: [
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const OnBoarding1()));
-                        },
-                        child: const Text(
-                          'SET UP',
-                          style: TextStyle(color: Colors.green, fontSize: 20),
-                        ))),
-                const Spacer(),
-                // Align(
-                //     alignment: Alignment.centerRight,
-                //     child: TextButton(
-                //         onPressed: () {
-                //           Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (context) => const BottomBar()));
-                //         },
-                //         child: const Text(
-                //           'SKIP',
-                //           style: TextStyle(color: Colors.green, fontSize: 20),
-                //         ))),
-              ],
-            ),
+            Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const OnBoarding1()));
+                    },
+                    child: const Text(
+                      'SET UP',
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ))),
           ],
         ),
       ),

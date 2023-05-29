@@ -58,45 +58,25 @@ class _OnBoarding1State extends State<OnBoarding1> {
               ),
             ),
             const Spacer(),
-            Row(
-              children: [
-                // Padding(
-                //   padding: const EdgeInsets.all(10),
-                //   child: SizedBox(
-                //       height: 60,
-                //       width: 100,
-                //       child: ElevatedButton(
-                //         onPressed: () {
-                //           Navigator.of(context).push(MaterialPageRoute(
-                //               builder: (context) => const BottomBar()));
-                //         },
-                //         style: ElevatedButton.styleFrom(
-                //             backgroundColor: Colors.green),
-                //         child: const Text('SKIP'),
-                //       )),
-                // ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          onSubmit(context);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const OnBoarding2();
-                          }));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            shape: const CircleBorder(),
-                            backgroundColor: Colors.green),
-                        child: const Icon(CupertinoIcons.arrow_right),
-                      )),
-                ),
-              ],
-            )
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      onSubmit(context);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const OnBoarding2();
+                      }));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        backgroundColor: Colors.green),
+                    child: const Icon(CupertinoIcons.arrow_right),
+                  )),
+            ),
           ]),
         ));
   }
