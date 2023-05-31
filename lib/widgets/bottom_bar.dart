@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../camera.dart';
-import '../screens/graph.dart';
-import '../screens/home.dart';
-import '../screens/settings.dart';
-import '../screens/timeline.dart';
+import '../pages/graph.dart';
+import '../pages/home.dart';
+import '../pages/settings.dart';
+import '../pages/timeline.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -17,18 +17,14 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int currentTab = 0;
   final List<Widget> screens = [
-    const HomePage(
-      imagePath: '',
-    ),
+    const HomePage(),
     const TimelinePage(),
     const GraphPage(),
     const SettingsPage()
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const HomePage(
-    imagePath: '',
-  );
+  Widget currentScreen = const HomePage();
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +53,7 @@ class _BottomBarState extends State<BottomBar> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = const HomePage(
-                          imagePath: '',
-                        );
+                        currentScreen = const HomePage();
                         currentTab = 0;
                       });
                     },
