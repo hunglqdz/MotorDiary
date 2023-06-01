@@ -13,9 +13,9 @@ Write down general information about your project.
 ### Technologies
 ***
 A list of technologies used within the project:
-*
-*
-*
+* Flutter
+* Dart language
+* Visual Studio Code
 ### Installation
 ***
-A little intro about the installation.
+Very easy! Just go to CH Play or App Store and get what you want!
