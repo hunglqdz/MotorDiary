@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/main.dart';
-import 'package:motor_diary/onboard/onboarding2.dart';
+import 'package:motor_diary/setup/setup2.dart';
 import 'package:provider/provider.dart';
-import 'onboard_content.dart';
+import 'setup_content.dart';
 
-class OnBoarding1 extends StatefulWidget {
-  const OnBoarding1({super.key});
+class Setup1 extends StatefulWidget {
+  const Setup1({super.key});
 
   @override
-  State<OnBoarding1> createState() => _OnBoarding1State();
+  State<Setup1> createState() => _Setup1State();
 }
 
-class _OnBoarding1State extends State<OnBoarding1> {
+class _Setup1State extends State<Setup1> {
   final myController = TextEditingController();
 
   void onSubmit(context) {
@@ -30,7 +30,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
         ),
         body: SafeArea(
           child: Column(children: [
-            const OnboardContent(
+            const SetupContent(
                 image: 'assets/illustration.jpg',
                 title: 'Step 1/3',
                 description: "Enter your name and your vehicle's name"),
@@ -68,7 +68,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
                       onSubmit(context);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const OnBoarding2();
+                        return const Setup2();
                       }));
                     },
                     style: ElevatedButton.styleFrom(

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:motor_diary/camera.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/bottom_bar.dart';
-import 'onboard_content.dart';
+import 'setup_content.dart';
 
-class OnBoarding3 extends StatefulWidget {
-  const OnBoarding3({super.key});
+class Setup3 extends StatefulWidget {
+  const Setup3({super.key});
 
   @override
-  State<OnBoarding3> createState() => _OnBoarding3State();
+  State<Setup3> createState() => _Setup3State();
 }
 
-class _OnBoarding3State extends State<OnBoarding3> {
+class _Setup3State extends State<Setup3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _OnBoarding3State extends State<OnBoarding3> {
       ),
       body: SafeArea(
         child: Column(children: [
-          const OnboardContent(
+          const SetupContent(
               image: 'assets/illustration.jpg',
               title: 'Step 3/3',
               description: "Take your first odometer"),

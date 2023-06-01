@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OnboardContent extends StatelessWidget {
-  const OnboardContent({
+class SetupContent extends StatelessWidget {
+  const SetupContent({
     super.key,
     required this.title,
     required this.description,

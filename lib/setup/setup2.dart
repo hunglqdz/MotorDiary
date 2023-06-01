@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/onboard/onboarding3.dart';
+import 'package:motor_diary/setup/setup3.dart';
 
-import 'onboard_content.dart';
+import 'setup_content.dart';
 
-class OnBoarding2 extends StatefulWidget {
-  const OnBoarding2({super.key});
+class Setup2 extends StatefulWidget {
+  const Setup2({super.key});
 
   @override
-  State<OnBoarding2> createState() => _OnBoarding2State();
+  State<Setup2> createState() => _Setup2State();
 }
 
-class _OnBoarding2State extends State<OnBoarding2> {
+class _Setup2State extends State<Setup2> {
   String dropdownValue = 'Customize';
   TextEditingController textController1 = TextEditingController();
   TextEditingController textController2 = TextEditingController();
@@ -28,7 +28,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
         ),
         body: SafeArea(
             child: Column(children: [
-          const OnboardContent(
+          const SetupContent(
               image: 'assets/illustration.jpg',
               title: 'Step 2/3',
               description: "Configure your vehicle"),
@@ -141,7 +141,7 @@ class _OnBoarding2State extends State<OnBoarding2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const OnBoarding3()));
+                            builder: (context) => const Setup3()));
                   },
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
