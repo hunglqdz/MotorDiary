@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/camera.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../widgets/bottom_bar.dart';
 import 'setup_content.dart';
 
 class Setup3 extends StatefulWidget {
@@ -31,44 +29,20 @@ class _Setup3State extends State<Setup3> {
               width: MediaQuery.of(context).size.width,
               child: Image.asset('assets/odometer.png')),
           const Spacer(),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                    height: 60,
-                    width: 150,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CameraScreen()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
-                      child: const Text('TAKE PHOTO'),
-                    )),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
+              height: 60,
+              width: 150,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const CameraScreen()));
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                child: const Text('TAKE PHOTO'),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                    height: 60,
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.setBool('is_setup_complete', true);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const BottomBar()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green),
-                      child: const Text('DONE'),
-                    )),
-              ),
-            ],
+            ),
           ),
         ]),
       ),

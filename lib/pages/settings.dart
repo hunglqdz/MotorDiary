@@ -14,7 +14,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   bool isEnabled = false;
-  late int _selectedValue;
+  double _numOfRecords = 5;
 
   void _showDialog() {
     showDialog(
@@ -22,44 +22,23 @@ class _SettingsPageState extends State<SettingsPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('How many records for prediction?'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                CheckboxListTile(
-                  title: const Text('5'),
-                  value: _selectedValue == 5,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = 5;
-                    });
-                  },
-                ),
-                CheckboxListTile(
-                  title: const Text('10'),
-                  value: _selectedValue == 10,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = 10;
-                    });
-                  },
-                ),
-                CheckboxListTile(
-                  title: const Text('15'),
-                  value: _selectedValue == 15,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedValue = 15;
-                    });
-                  },
-                ),
-              ],
-            ),
+            content: Slider(
+                value: _numOfRecords,
+                max: 10,
+                min: 5,
+                divisions: 5,
+                label: _numOfRecords.toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _numOfRecords = value;
+                  });
+                }),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Save'),
+                child: const Text('SAVE'),
               )
             ],
           );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/onboard/onboarding1.dart';
+import 'package:motor_diary/setup/setup1.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -43,7 +43,7 @@ class WelcomePage extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const OnBoarding1()));
+                          builder: (context) => const Setup1()));
                     },
                     child: const Text(
                       'SET UP',
