@@ -14,16 +14,10 @@ class Setup1 extends StatefulWidget {
 
 class _Setup1State extends State<Setup1> {
   final nameController = TextEditingController();
-  final vehicleController = TextEditingController();
 
-  void onSubmit1(context) {
+  void onSubmit(context) {
     Provider.of<MyTextFieldValue>(context, listen: false)
         .setText(nameController.text);
-  }
-
-  void onSubmit2(context) {
-    Provider.of<MyTextFieldValue>(context, listen: false)
-        .setText(vehicleController.text);
   }
 
   @override
@@ -52,12 +46,11 @@ class _Setup1State extends State<Setup1> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: TextField(
-                controller: vehicleController,
                 maxLength: 30,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   suffixIcon: Icon(Icons.motorcycle),
                   border: OutlineInputBorder(),
                   labelText: "Your Vehicle's Name",
@@ -72,8 +65,7 @@ class _Setup1State extends State<Setup1> {
                   width: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      onSubmit1(context);
-                      onSubmit2(context);
+                      onSubmit(context);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return const Setup2();

@@ -16,35 +16,6 @@ class _SettingsPageState extends State<SettingsPage> {
   bool isEnabled = false;
   double _numOfRecords = 5;
 
-  void _showDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('How many records for prediction?'),
-            content: Slider(
-                value: _numOfRecords,
-                max: 10,
-                min: 5,
-                divisions: 5,
-                label: _numOfRecords.toString(),
-                onChanged: (double value) {
-                  setState(() {
-                    _numOfRecords = value;
-                  });
-                }),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('SAVE'),
-              )
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     final myTextFieldValue = Provider.of<MyTextFieldValue>(context);
@@ -102,12 +73,25 @@ class _SettingsPageState extends State<SettingsPage> {
               height: 1,
               color: Colors.grey,
             ),
-            ListTile(
-              leading: const Icon(CupertinoIcons.gauge, color: Colors.green),
-              title: const Text('Predictor Settings'),
-              trailing: const Icon(Icons.arrow_right),
-              onTap: _showDialog,
-            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  const Text('Number of records for predictor'),
+                  Slider(
+                      value: _numOfRecords,
+                      max: 15,
+                      min: 5,
+                      divisions: 10,
+                      label: _numOfRecords.round().toString(),
+                      onChanged: (double value) {
+                        setState(() {
+                          _numOfRecords = value;
+                        });
+                      })
+                ],
+              ),
+            )
           ]),
         ),
         const SizedBox(height: 10),
