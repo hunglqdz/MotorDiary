@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widgets/bottom_bar.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 //import 'package:tflite/tflite.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -16,6 +17,8 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen> {
   File? _image;
+
+  late Interpreter _interpreter;
   // String _result = '';
 
   Future<void> _getImage() async {
@@ -35,6 +38,35 @@ class _CameraScreenState extends State<CameraScreen> {
       _image = File(image.path);
       // _result = recognitions![0]['label'];
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadModel();
+  }
+
+  Future<void> loadModel() async {
+    try {
+      final interpreterOptions = InterpreterOptions();
+      _interpreter = await Interpreter.fromAsset('assets/detect.tflite',
+          options: interpreterOptions);
+    } catch (e) {
+      print('Error loading model: $e');
+    }
+  }
+
+  List<int> runInference(List<Image> input) {
+    final inputs = [input];
+    final outputs = [_interpreter.getOutputTensor(0).shape];
+    _interpreter.run(inputs, outputs);
+    return outputs[0];
+  }
+
+  @override
+  void dispose() {
+    _interpreter.close();
+    super.dispose();
   }
 
   // @override
@@ -101,6 +133,18 @@ class _CameraScreenState extends State<CameraScreen> {
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
             ),
+            const Text('Model inference result:'),
+            FutureBuilder<List<int>>(
+              future: runInference([Image.file(_image!)]),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final output = snapshot.data;
+                  return Text('$output');
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
+            )
           ],
         ),
       ),
