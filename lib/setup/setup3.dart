@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/camera.dart';
+import 'package:motor_diary/camera/camera_screen.dart';
 import 'setup_content.dart';
 
 class Setup3 extends StatefulWidget {

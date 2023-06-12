@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/widgets/bottom_bar.dart';
+import 'package:motor_diary/bottom_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'welcome/welcome.dart';
+import 'welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
