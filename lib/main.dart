@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/setup/setup1.dart';
 import 'package:provider/provider.dart';
+import 'onboard/onboarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,23 +11,17 @@ void main() async {
   ));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Motor Diary',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const Setup1(),
+      home: const Onboarding(),
       debugShowCheckedModeBanner: false,
     );
   }
