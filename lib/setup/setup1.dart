@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/main.dart';
 import 'package:motor_diary/setup/setup2.dart';
-import 'package:provider/provider.dart';
 import 'setup_content.dart';
 
 class Setup1 extends StatefulWidget {
@@ -13,13 +11,6 @@ class Setup1 extends StatefulWidget {
 }
 
 class _Setup1State extends State<Setup1> {
-  final nameController = TextEditingController();
-
-  void onSubmit(context) {
-    Provider.of<MyTextFieldValue>(context, listen: false)
-        .setText(nameController.text);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +25,11 @@ class _Setup1State extends State<Setup1> {
                 image: 'assets/illustration.jpg',
                 title: 'Step 1/3',
                 description: "Enter your name and your vehicle's name"),
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: TextField(
-                controller: nameController,
                 maxLength: 30,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   suffixIcon: Icon(CupertinoIcons.person),
                   border: OutlineInputBorder(),
                   labelText: 'Your Name',
@@ -65,7 +55,6 @@ class _Setup1State extends State<Setup1> {
                   width: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      onSubmit(context);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return const Setup2();

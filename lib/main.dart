@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'onboard/onboarding.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(ChangeNotifierProvider(
-    create: (_) => MyTextFieldValue(),
-    child: const MyApp(),
-  ));
+void main() {
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,16 +20,5 @@ class MyApp extends StatelessWidget {
       home: const Onboarding(),
       debugShowCheckedModeBanner: false,
     );
-  }
-}
-
-class MyTextFieldValue extends ChangeNotifier {
-  String _text = '';
-
-  String get text => _text;
-
-  void setText(String newText) {
-    _text = newText;
-    notifyListeners();
   }
 }

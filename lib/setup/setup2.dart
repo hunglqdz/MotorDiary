@@ -1,8 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/setup/setup3.dart';
+import 'package:provider/provider.dart';
 
 import 'setup_content.dart';
+
+class Vehicle {
+  late String timeOil;
+  late String disOil;
+  late String timeMaintenance;
+  late String disMaintenance;
+
+  Vehicle(
+      {required this.timeOil,
+      required this.disOil,
+      required this.timeMaintenance,
+      required this.disMaintenance});
+}
 
 class Setup2 extends StatefulWidget {
   const Setup2({super.key});
@@ -138,6 +152,14 @@ class _Setup2State extends State<Setup2> {
                 width: 60,
                 child: ElevatedButton(
                   onPressed: () {
+                    final vehicle = Vehicle(
+                      timeOil: textController1.text,
+                      disOil: textController2.text,
+                      timeMaintenance: textController3.text,
+                      disMaintenance: textController4.text,
+                    );
+                    Provider.of<VehicleProvider>(context, listen: false)
+                        .saveVehicle(vehicle);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -150,5 +172,16 @@ class _Setup2State extends State<Setup2> {
                 )),
           ),
         ])));
+  }
+}
+
+class VehicleProvider with ChangeNotifier {
+  late Vehicle _vehicle;
+
+  Vehicle get vehicle => _vehicle;
+
+  void saveVehicle(Vehicle vehicle) {
+    _vehicle = vehicle;
+    notifyListeners();
   }
 }

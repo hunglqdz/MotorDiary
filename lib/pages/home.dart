@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/main.dart';
-import 'package:provider/provider.dart';
 
 import '../detail.dart';
 import '../detail2.dart';
@@ -15,7 +13,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final myTextFieldValue = Provider.of<MyTextFieldValue>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -30,10 +27,10 @@ class _HomePageState extends State<HomePage> {
                   bottomRight: Radius.circular(20),
                 ),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
-                  'Hello, ${myTextFieldValue.text}',
-                  style: const TextStyle(
+                  'Hello, master',
+                  style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 25),
