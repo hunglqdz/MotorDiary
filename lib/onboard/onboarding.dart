@@ -52,7 +52,7 @@ class _OnboardingState extends State<Onboarding> {
                       Text(
                         contents[i].title,
                         style: const TextStyle(
-                          fontSize: 35,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -110,8 +110,8 @@ class _OnboardingState extends State<Onboarding> {
 
   Container buildDot(int index, BuildContext context) {
     return Container(
-      height: 10,
-      width: currentIndex == index ? 25 : 10,
+      height: 20,
+      width: currentIndex == index ? 40 : 20,
       margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

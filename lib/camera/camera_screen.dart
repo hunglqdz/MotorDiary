@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:motor_diary/bottom_bar.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -11,61 +11,89 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  late File imageFile;
+  late File _image;
+  late List _output;
+  bool _loading = false;
+  final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = true;
+    loadModel().then((value) {
+      setState(() {
+        _loading = false;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  classifyImage(File image) async {
+    var output = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 1,
+      threshold: 0.1,
+    );
+    setState(() {
+      _output = output!;
+      _loading = false;
+    });
+  }
+
+  pickImage() async {
+    var image = await picker.pickImage(source: ImageSource.camera);
+    if (image == null) return null;
+    setState(() {
+      _image = File(image.path);
+    });
+    classifyImage(_image);
+  }
+
+  loadModel() async {
+    await Tflite.loadModel(
+        model: 'assets/model/detect.tflite',
+        labels: 'assets/model/labelmap.txt');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Awesome Camera'),
-      ),
-      body: Container(
-        child: imageFile == null
-            ? Container(
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: () {
-                        _takePhoto();
-                      },
-                      child: const Text('TAKE A PHOTO'),
-                    ),
-                  ],
+      body: _loading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _image == null
+                    ? Container(
+                        height: 300,
+                      )
+                    : Image.file(
+                        _image,
+                        height: 300,
+                      ),
+                const SizedBox(
+                  height: 16,
                 ),
-              )
-            : Column(
-                children: [
-                  Image.file(
-                    imageFile,
-                    fit: BoxFit.cover,
-                  ),
-                  ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BottomBar()));
-                      },
-                      icon: const Icon(Icons.done),
-                      label: const Text('DONE'))
-                ],
-              ),
+                _output == null
+                    ? const Text('No Prediction')
+                    : Text(
+                        'Prediction: ${_output[0]['label']}',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+              ],
+            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: pickImage,
+        tooltip: 'Pick Image',
+        child: const Icon(Icons.add_a_photo),
       ),
     );
-  }
-
-  _takePhoto() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        imageFile = File(pickedFile.path);
-      });
-    }
   }
 }
