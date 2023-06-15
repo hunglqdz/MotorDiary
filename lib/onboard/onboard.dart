@@ -1,10 +1,11 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_onboarding/widget.dart';
+
+import '../widget.dart';
 
 class Onboard extends StatefulWidget {
+  const Onboard({super.key});
+
   @override
   _OnboardState createState() => _OnboardState();
 }
@@ -30,17 +31,17 @@ class _OnboardState extends State<Onboard> {
         child: Container(
           decoration: getDecoration(),
           child: Padding(
-            padding: EdgeInsets.symmetric(verticle: 40),
+            padding: const EdgeInsets.symmetric(vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
+                SizedBox(
                   height: 650,
                   child: PageView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     controller: _pageController,
                     onPageChanged: (int page) {
-                      setStage(() {
+                      setState(() {
                         _currentPage = page;
                       });
                     },
@@ -64,11 +65,11 @@ class _OnboardState extends State<Onboard> {
                     ? Expanded(
                         child: Align(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 15),
                                   child: Text(
                                     'Skip',
@@ -82,7 +83,7 @@ class _OnboardState extends State<Onboard> {
                           ),
                         ),
                       )
-                    : Text(''),
+                    : const Text(''),
               ],
             ),
           ),

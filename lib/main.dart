@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const Onboarding(),
+      home: const Onboard(),
       debugShowCheckedModeBanner: false,
     );
   }
