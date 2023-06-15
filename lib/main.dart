@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'onboard/onboarding.dart';
+import 'onboard/onboard.dart';
 
 int? initScreen;
 
