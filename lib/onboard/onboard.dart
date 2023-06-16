@@ -1,93 +1,183 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:motor_diary/bottom_bar.dart';
+import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/onboard/onboard_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widget.dart';
-
-class Onboard extends StatefulWidget {
-  const Onboard({super.key});
+class OnBoard extends StatefulWidget {
+  const OnBoard({super.key});
 
   @override
-  _OnboardState createState() => _OnboardState();
+  State<OnBoard> createState() => _OnBoardState();
 }
 
-class _OnboardState extends State<Onboard> {
-  final int _numPages = 3;
-  final PageController _pageController = PageController(initialPage: 0);
-  int _currentPage = 0;
+class _OnBoardState extends State<OnBoard> {
+  int currentIndex = 0;
+  late PageController _pageController;
+  List<OnboardModel> screens = <OnboardModel>[
+    OnboardModel(
+        image: 'assets/images/onboard1.png',
+        text: 'Welcome to MotorDiary',
+        description: "Let's enjoy your app!",
+        background: Colors.white,
+        button: primaryColor),
+    OnboardModel(
+        image: 'assets/images/onboard2.png',
+        text: 'Manage your vehicle',
+        description: "Never miss important events!",
+        background: Colors.white,
+        button: primaryColor),
+    OnboardModel(
+        image: 'assets/images/onboard3.jpg',
+        text: 'Enjoy your app',
+        description: 'Discover many functionalities!',
+        background: Colors.white,
+        button: primaryColor),
+  ];
 
-  List<Widget> _buildPageIndicator() {
-    List<Widget> list = [];
-    for (int i = 0; i < _numPages; i++) {
-      list.add(i == _currentPage ? indicator(true) : indicator(false));
-    }
-    return list;
+  @override
+  void initState() {
+    _pageController.dispose();
+    super.initState();
+  }
+
+  _storeOnboardInfo() async {
+    print('Shared pref called');
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+    print(prefs.getInt('onBoard'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: Container(
-          decoration: getDecoration(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                SizedBox(
-                  height: 650,
-                  child: PageView(
-                    physics: const ClampingScrollPhysics(),
-                    controller: _pageController,
-                    onPageChanged: (int page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
-                    children: <Widget>[
-                      getField('', 'assets/images/onboard1.png',
-                          'Welcome to MotorDiary!'),
-                      getField(
-                          'Manage your vehicle',
-                          'assets/images/onboard2.png',
-                          'Predict important events by capturing images!'),
-                      getField('Expand lifespan', 'assets/images/onboard3.jpg',
-                          'Keep your vehicle healthy!'),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _buildPageIndicator(),
-                ),
-                _currentPage == _numPages - 1
-                    ? Expanded(
-                        child: Align(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
-                                  child: Text(
-                                    'Skip',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 24),
-                                  ),
-                                ),
-                                getButton(_pageController),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    : const Text(''),
-              ],
+      backgroundColor: currentIndex % 2 == 0 ? Colors.white : primaryColor,
+      appBar: AppBar(
+        backgroundColor: currentIndex % 2 == 0 ? Colors.white : Colors.blue,
+        elevation: 0.0,
+        actions: [
+          TextButton(
+            onPressed: () {
+              _storeOnboardInfo();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const BottomBar()));
+            },
+            child: Text(
+              "Skip",
+              style: TextStyle(
+                color: currentIndex % 2 == 0 ? Colors.black : Colors.white,
+              ),
             ),
-          ),
-        ),
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: PageView.builder(
+            itemCount: screens.length,
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            onPageChanged: (int index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            itemBuilder: (_, index) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(screens[index].image),
+                  SizedBox(
+                    height: 10.0,
+                    child: ListView.builder(
+                      itemCount: screens.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 3.0),
+                                width: currentIndex == index ? 25 : 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  color: currentIndex == index
+                                      ? Colors.black
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                            ]);
+                      },
+                    ),
+                  ),
+                  Text(
+                    screens[index].text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 27.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      color: index % 2 == 0 ? Colors.black : Colors.white,
+                    ),
+                  ),
+                  Text(
+                    screens[index].description,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: 'Montserrat',
+                      color: index % 2 == 0 ? Colors.black : Colors.white,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      print(index);
+                      if (index == screens.length - 1) {
+                        await _storeOnboardInfo();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BottomBar()));
+                      }
+
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.bounceIn,
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10),
+                      decoration: BoxDecoration(
+                          color: index % 2 == 0 ? Colors.blue : Colors.white,
+                          borderRadius: BorderRadius.circular(15.0)),
+                      child: Row(mainAxisSize: MainAxisSize.min, children: [
+                        Text(
+                          "Next",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color:
+                                  index % 2 == 0 ? Colors.white : Colors.blue),
+                        ),
+                        const SizedBox(
+                          width: 15.0,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_sharp,
+                          color: index % 2 == 0 ? Colors.white : Colors.blue,
+                        )
+                      ]),
+                    ),
+                  )
+                ],
+              );
+            }),
       ),
     );
   }

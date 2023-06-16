@@ -17,8 +17,6 @@ dependencies:
   image:
   flutter_tflite:
 
-  tflite_flutter:
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -27,4 +25,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/onboard1.png
+    - assets/images/onboard2.png
+    - assets/images/onboard3.jpg
