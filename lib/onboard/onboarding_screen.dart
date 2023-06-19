@@ -1,176 +1,225 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/setup/setup1.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
 
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  late PageController _pageController;
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final int _numPages = 3;
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
 
-  int _pageIndex = 0;
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0);
-    super.initState();
+  List<Widget> _buildPageIndicator() {
+    List<Widget> list = [];
+    for (int i = 0; i < _numPages; i++) {
+      list.add(i == _currentPage ? _indicator(true) : _indicator(false));
+    }
+    return list;
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
+  Widget _indicator(bool isActive) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      height: 10,
+      width: isActive ? 30 : 10,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.white : primaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.1, 0.4, 0.7, 0.9],
+              colors: [
+                primaryColor,
+                primaryColor.withOpacity(0.1),
+                primaryColor.withOpacity(0.2),
+                primaryColor.withOpacity(0.3),
+              ],
+            ),
+          ),
           child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                itemCount: demo_data.length,
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    _pageIndex = index;
-                  });
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () => print('Skip'),
+                    child: const Text(
+                      'Skip',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 600,
+                  child: PageView(
+                    physics: const ClampingScrollPhysics(),
+                    controller: _pageController,
+                    onPageChanged: (int page) {
+                      setState(() {
+                        _currentPage = page;
+                      });
+                    },
+                    children: const <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(40),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: Image(
+                                image: AssetImage(
+                                  'assets/images/onboard1.png',
+                                ),
+                                height: 300,
+                                width: 300,
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                            Text('Welcome to MotorDiary'),
+                            SizedBox(height: 15),
+                            Text("Let's go!"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(40),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: Image(
+                                image: AssetImage(
+                                  'assets/images/onboard2.png',
+                                ),
+                                height: 300,
+                                width: 300,
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                            Text('Welcome to MotorDiary'),
+                            SizedBox(height: 15),
+                            Text("Let's go!"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(40),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: Image(
+                                image: AssetImage(
+                                  'assets/images/onboard3.jpg',
+                                ),
+                                height: 300,
+                                width: 300,
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                            Text('Welcome to MotorDiary'),
+                            SizedBox(height: 15),
+                            Text("Let's go!"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _buildPageIndicator(),
+                ),
+                _currentPage != _numPages - 1
+                    ? Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight,
+                          child: TextButton(
+                            onPressed: () {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.ease,
+                              );
+                            },
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  'Next',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Icon(
+                                  CupertinoIcons.arrow_right,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    : const Text(''),
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomSheet: _currentPage == _numPages - 1
+          ? Container(
+              height: 50,
+              width: double.infinity,
+              color: Colors.white,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Setup1()));
                 },
-                itemBuilder: (context, index) => OnboardContent(
-                  image: demo_data[index].image,
-                  title: demo_data[index].title,
-                  description: demo_data[index].description,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Text(
+                      'Get Started',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Row(
-              children: [
-                ...List.generate(
-                  demo_data.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: DotIndicator(isActive: index == _pageIndex),
-                  ),
-                ),
-                const Spacer(),
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                          curve: Curves.ease,
-                          duration: const Duration(milliseconds: 300));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                    ),
-                    child: const Icon(
-                      CupertinoIcons.arrow_right,
-                    ),
-                  ),
-                )
-              ],
             )
-          ],
-        ),
-      )),
-    );
-  }
-}
-
-class DotIndicator extends StatelessWidget {
-  const DotIndicator({
-    super.key,
-    this.isActive = false,
-  });
-
-  final bool isActive;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      height: isActive ? 12 : 4,
-      width: 4,
-      decoration: BoxDecoration(
-        color: isActive ? primaryColor : primaryColor.withOpacity(0.4),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-    );
-  }
-}
-
-class Onboard {
-  final String image, title, description;
-
-  Onboard({
-    required this.image,
-    required this.title,
-    required this.description,
-  });
-}
-
-final List<Onboard> demo_data = [
-  Onboard(
-    image: 'assets/images/onboard1.png',
-    title: 'Welcome to MotorDiary',
-    description: "Here you'll manage your private vehicle.",
-  ),
-  Onboard(
-    image: 'assets/images/onboard2.png',
-    title: 'Oil change and Maintenance',
-    description: 'Keep up with important events by capturing your odometer.',
-  ),
-  Onboard(
-    image: 'assets/images/onboard3.jpg',
-    title: 'Enjoy your app',
-    description: 'Illustrative graphs and more functionalities.',
-  ),
-];
-
-class OnboardContent extends StatelessWidget {
-  const OnboardContent({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.description,
-  });
-
-  final String image, title, description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Spacer(),
-        Image.asset(
-          image,
-          height: 250,
-        ),
-        const Spacer(),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .headlineLarge
-              ?.copyWith(fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          description,
-          textAlign: TextAlign.center,
-        ),
-        const Spacer(),
-      ],
+          : const Text(''),
     );
   }
 }

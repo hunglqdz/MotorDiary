@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:motor_diary/bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'onboard/onboard.dart';
+import 'onboard/onboarding_screen.dart';
 
-int? isViewed;
+int? initScreen;
 
-void main() async {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  isViewed = prefs.getInt('onBoard');
+  initScreen = prefs.getInt('initScreen');
+  await prefs.setInt('initScreen', 1);
+  print('initScreen $initScreen');
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +26,11 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: isViewed != 0 ? const OnBoard() : const BottomBar(),
+      initialRoute: initScreen == 0 || initScreen == null ? 'first' : '/',
+      routes: {
+        '/': (context) => const BottomBar(),
+        'first': (context) => const OnboardingScreen(),
+      },
     );
   }
 }
