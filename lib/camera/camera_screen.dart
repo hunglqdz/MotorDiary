@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
+import 'package:motor_diary/constant.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -11,8 +13,8 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  late File _image;
-  late List _output;
+  File? _image;
+  List? _output;
   bool _loading = false;
   final picker = ImagePicker();
 
@@ -50,7 +52,7 @@ class _CameraScreenState extends State<CameraScreen> {
     setState(() {
       _image = File(image.path);
     });
-    classifyImage(_image);
+    classifyImage(_image!);
   }
 
   loadModel() async {
@@ -75,7 +77,7 @@ class _CameraScreenState extends State<CameraScreen> {
                         height: 300,
                       )
                     : Image.file(
-                        _image,
+                        _image!,
                         height: 300,
                       ),
                 const SizedBox(
@@ -84,16 +86,19 @@ class _CameraScreenState extends State<CameraScreen> {
                 _output == null
                     ? const Text('No Prediction')
                     : Text(
-                        'Prediction: ${_output[0]['label']}',
+                        'Prediction: ${_output![0]['label']}',
                         style: const TextStyle(fontSize: 20),
                       ),
               ],
             ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        foregroundColor: primaryColor,
         onPressed: pickImage,
         tooltip: 'Pick Image',
-        child: const Icon(Icons.add_a_photo),
+        child: const Icon(CupertinoIcons.camera),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -13,6 +13,9 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Setting'),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -23,38 +26,47 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const Divider(),
             Row(
-              children: [
-                RadioListTile(
-                  title: const Text('5'),
-                  value: 5,
-                  groupValue: numOfRecords,
-                  onChanged: (value) {
-                    setState(() {
-                      numOfRecords = value;
-                    });
-                  },
+              children: <Widget>[
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: RadioListTile(
+                    title: const Text('5'),
+                    value: 5,
+                    groupValue: numOfRecords,
+                    onChanged: (value) {
+                      setState(() {
+                        numOfRecords = value;
+                      });
+                    },
+                  ),
                 ),
                 const VerticalDivider(),
-                RadioListTile(
-                  title: const Text('10'),
-                  value: 10,
-                  groupValue: numOfRecords,
-                  onChanged: (value) {
-                    setState(() {
-                      numOfRecords = value;
-                    });
-                  },
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: RadioListTile(
+                    title: const Text('10'),
+                    value: 10,
+                    groupValue: numOfRecords,
+                    onChanged: (value) {
+                      setState(() {
+                        numOfRecords = value;
+                      });
+                    },
+                  ),
                 ),
                 const VerticalDivider(),
-                RadioListTile(
-                  title: const Text('15'),
-                  value: 15,
-                  groupValue: numOfRecords,
-                  onChanged: (value) {
-                    setState(() {
-                      numOfRecords = value;
-                    });
-                  },
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: RadioListTile(
+                    title: const Text('15'),
+                    value: 15,
+                    groupValue: numOfRecords,
+                    onChanged: (value) {
+                      setState(() {
+                        numOfRecords = value;
+                      });
+                    },
+                  ),
                 ),
               ],
             )

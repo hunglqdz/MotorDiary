@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/setup/setup3.dart';
-import 'package:provider/provider.dart';
 
 import 'setup_content.dart';
 
@@ -43,7 +43,7 @@ class _Setup2State extends State<Setup2> {
         body: SafeArea(
             child: Column(children: [
           const SetupContent(
-              image: 'assets/illustration.jpg',
+              image: 'assets/images/illustration.jpg',
               title: 'Step 2/3',
               description: "Configure your vehicle"),
           DropdownButton<String>(
@@ -152,14 +152,6 @@ class _Setup2State extends State<Setup2> {
                 width: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    final vehicle = Vehicle(
-                      timeOil: textController1.text,
-                      disOil: textController2.text,
-                      timeMaintenance: textController3.text,
-                      disMaintenance: textController4.text,
-                    );
-                    Provider.of<VehicleProvider>(context, listen: false)
-                        .saveVehicle(vehicle);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -167,21 +159,10 @@ class _Setup2State extends State<Setup2> {
                   },
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      backgroundColor: Colors.green),
+                      backgroundColor: primaryColor),
                   child: const Icon(CupertinoIcons.arrow_right),
                 )),
           ),
         ])));
-  }
-}
-
-class VehicleProvider with ChangeNotifier {
-  late Vehicle _vehicle;
-
-  Vehicle get vehicle => _vehicle;
-
-  void saveVehicle(Vehicle vehicle) {
-    _vehicle = vehicle;
-    notifyListeners();
   }
 }

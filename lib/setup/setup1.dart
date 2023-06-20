@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/setup/setup2.dart';
 import 'setup_content.dart';
 
@@ -22,7 +23,7 @@ class _Setup1State extends State<Setup1> {
         body: SafeArea(
           child: Column(children: [
             const SetupContent(
-                image: 'assets/illustration.jpg',
+                image: 'assets/images/illustration.jpg',
                 title: 'Step 1/3',
                 description: "Enter your name and your vehicle's name"),
             const Padding(
@@ -55,14 +56,14 @@ class _Setup1State extends State<Setup1> {
                   width: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context)
-                        =>const Setup2()
-                      ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Setup2()));
                     },
                     style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
-                        backgroundColor: Colors.green),
+                        backgroundColor: primaryColor),
                     child: const Icon(CupertinoIcons.arrow_right),
                   )),
             ),

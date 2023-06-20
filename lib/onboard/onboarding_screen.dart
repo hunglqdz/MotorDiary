@@ -61,19 +61,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () => print('Skip'),
-                    child: const Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: 600,
                   child: PageView(
@@ -100,9 +87,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Text('Welcome to MotorDiary'),
-                            SizedBox(height: 15),
-                            Text("Let's go!"),
+                            Text(
+                              'Welcome to MotorDiary!',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 30),
+                            Text(
+                              "Here you'll manage your private vehicle.",
+                              style: TextStyle(fontSize: 20),
+                            ),
                           ],
                         ),
                       ),
@@ -121,9 +115,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Text('Welcome to MotorDiary'),
-                            SizedBox(height: 15),
-                            Text("Let's go!"),
+                            Text(
+                              'Oil change and Maintenance!',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 30),
+                            Text(
+                              'Keep up with important events by capturing odometer.',
+                              style: TextStyle(fontSize: 20),
+                            ),
                           ],
                         ),
                       ),
@@ -142,9 +143,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Text('Welcome to MotorDiary'),
-                            SizedBox(height: 15),
-                            Text("Let's go!"),
+                            Text(
+                              'Discover many functionalities!',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 30),
+                            Text(
+                              'Illustrative graphs and more.',
+                              style: TextStyle(fontSize: 20),
+                            ),
                           ],
                         ),
                       ),

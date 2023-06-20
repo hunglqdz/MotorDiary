@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/camera/camera_screen.dart';
+import 'package:motor_diary/constant.dart';
 import 'setup_content.dart';
 
 class Setup3 extends StatefulWidget {
@@ -20,14 +21,14 @@ class _Setup3State extends State<Setup3> {
       body: SafeArea(
         child: Column(children: [
           const SetupContent(
-              image: 'assets/illustration.jpg',
+              image: 'assets/images/illustration.jpg',
               title: 'Step 3/3',
               description: "Take your first odometer"),
           const Spacer(),
           SizedBox(
               height: 100,
               width: MediaQuery.of(context).size.width,
-              child: Image.asset('assets/odometer.png')),
+              child: Image.asset('assets/images/odometer.png')),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(10),
@@ -39,7 +40,7 @@ class _Setup3State extends State<Setup3> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const CameraScreen()));
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
                 child: const Text('TAKE PHOTO'),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 import 'camera/camera_screen.dart';
 import 'pages/graph.dart';
@@ -32,7 +33,7 @@ class _BottomBarState extends State<BottomBar> {
       body: PageStorage(bucket: bucket, child: currentScreen),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
-          foregroundColor: Colors.green,
+          foregroundColor: primaryColor,
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const CameraScreen()));
@@ -62,11 +63,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(CupertinoIcons.home,
                             color:
-                                currentTab == 0 ? Colors.green : Colors.black),
+                                currentTab == 0 ? primaryColor : Colors.black),
                         Text('Home',
                             style: TextStyle(
                                 color: currentTab == 0
-                                    ? Colors.green
+                                    ? primaryColor
                                     : Colors.black))
                       ],
                     ),
@@ -83,11 +84,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(CupertinoIcons.calendar,
                             color:
-                                currentTab == 1 ? Colors.green : Colors.black),
+                                currentTab == 1 ? primaryColor : Colors.black),
                         Text('Timeline',
                             style: TextStyle(
                                 color: currentTab == 1
-                                    ? Colors.green
+                                    ? primaryColor
                                     : Colors.black))
                       ],
                     ),
@@ -109,11 +110,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(CupertinoIcons.chart_bar,
                             color:
-                                currentTab == 2 ? Colors.green : Colors.black),
+                                currentTab == 2 ? primaryColor : Colors.black),
                         Text('Graph',
                             style: TextStyle(
                                 color: currentTab == 2
-                                    ? Colors.green
+                                    ? primaryColor
                                     : Colors.black))
                       ],
                     ),
@@ -130,11 +131,11 @@ class _BottomBarState extends State<BottomBar> {
                       children: [
                         Icon(CupertinoIcons.gear,
                             color:
-                                currentTab == 3 ? Colors.green : Colors.black),
+                                currentTab == 3 ? primaryColor : Colors.black),
                         Text('Settings',
                             style: TextStyle(
                                 color: currentTab == 3
-                                    ? Colors.green
+                                    ? primaryColor
                                     : Colors.black))
                       ],
                     ),
