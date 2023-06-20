@@ -56,9 +56,9 @@ class _Setup1State extends State<Setup1> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const Setup2();
-                      }));
+                          MaterialPageRoute(builder: (context)
+                        =>const Setup2()
+                      ));
                     },
                     style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
