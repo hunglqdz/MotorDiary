@@ -31,5 +31,9 @@ flutter:
     - assets/images/onboard3.jpg
     - assets/images/illustration.jpg
     - assets/images/odometer.png
+    - assets/model/labelmap.txt
+    - assets/model/detect.tflite
+    - assets/images/illustration.jpg
+    - assets/images/odometer.png
     - assets/model/detect.tflite
     - assets/model/labelmap.txt
