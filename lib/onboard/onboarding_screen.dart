@@ -209,7 +209,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               color: Colors.white,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const Setup1()));
                 },
                 child: Center(
