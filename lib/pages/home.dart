@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               child: InkWell(
                 onTap: () {},
                 child: Container(
@@ -62,12 +62,12 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(16),
                             child: Text('01 Jan 2023'),
                           ),
                           Spacer(),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(16),
                             child: Text('12345'),
                           )
                         ],
@@ -101,12 +101,12 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(16),
                             child: Text('14 May 2023'),
                           ),
                           Spacer(),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(16),
                             child: Text('23456'),
                           )
                         ],
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(16),
                     child: Text(
                       'Pending Events',
                       style: TextStyle(fontSize: 25),
@@ -158,14 +158,14 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       'Estimated Date:',
                                       style: TextStyle(color: Colors.grey),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       'At (km):',
                                       style: TextStyle(color: Colors.grey),
@@ -176,13 +176,13 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       '01 Jun 2023',
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       '34567',
                                     ),
@@ -225,14 +225,14 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       'Estimated Date:',
                                       style: TextStyle(color: Colors.grey),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       'At (km):',
                                       style: TextStyle(color: Colors.grey),
@@ -243,13 +243,13 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       '01 Jun 2023',
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(16),
                                     child: Text(
                                       '34567',
                                     ),
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

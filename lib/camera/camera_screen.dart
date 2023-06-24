@@ -98,7 +98,7 @@ class _CameraScreenState extends State<CameraScreen> {
         tooltip: 'Pick Image',
         child: const Icon(CupertinoIcons.camera),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

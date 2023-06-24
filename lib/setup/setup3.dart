@@ -19,33 +19,39 @@ class _Setup3State extends State<Setup3> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Column(children: [
-          const SetupContent(
-              image: 'assets/images/illustration.jpg',
-              title: 'Step 3/3',
-              description: "Take your first odometer"),
-          const Spacer(),
-          SizedBox(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              child: Image.asset('assets/images/odometer.png')),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: SizedBox(
-              height: 60,
-              width: 150,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const CameraScreen()));
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                child: const Text('TAKE PHOTO'),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(children: [
+              const SetupContent(
+                  image: 'assets/images/illustration.jpg',
+                  title: 'Step 3/3',
+                  description: "Take your first odometer"),
+              const Spacer(),
+              SizedBox(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset('assets/images/odometer.png')),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: SizedBox(
+                  height: 60,
+                  width: 150,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const CameraScreen()));
+                    },
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: primaryColor),
+                    child: const Text('TAKE PHOTO'),
+                  ),
+                ),
               ),
-            ),
+            ]),
           ),
-        ]),
+        ),
       ),
     );
   }

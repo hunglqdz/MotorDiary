@@ -73,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     children: const <Widget>[
                       Padding(
-                        padding: EdgeInsets.all(40),
+                        padding: EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -82,8 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 image: AssetImage(
                                   'assets/images/onboard1.png',
                                 ),
-                                height: 300,
-                                width: 300,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             SizedBox(height: 30),
@@ -101,7 +100,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(40),
+                        padding: EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -110,8 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 image: AssetImage(
                                   'assets/images/onboard2.png',
                                 ),
-                                height: 300,
-                                width: 300,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             SizedBox(height: 30),
@@ -129,7 +127,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(40),
+                        padding: EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -138,8 +136,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 image: AssetImage(
                                   'assets/images/onboard3.jpg',
                                 ),
-                                height: 300,
-                                width: 300,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             SizedBox(height: 30),

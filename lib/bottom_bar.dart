@@ -35,11 +35,15 @@ class _BottomBarState extends State<BottomBar> {
           backgroundColor: Colors.black,
           foregroundColor: primaryColor,
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CameraScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CameraScreen(),
+              ),
+            );
           },
           child: const Icon(CupertinoIcons.camera)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
@@ -53,10 +57,12 @@ class _BottomBarState extends State<BottomBar> {
                 children: [
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
-                        currentScreen = const HomePage();
-                        currentTab = 0;
-                      });
+                      setState(
+                        () {
+                          currentScreen = const HomePage();
+                          currentTab = 0;
+                        },
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -64,20 +70,24 @@ class _BottomBarState extends State<BottomBar> {
                         Icon(CupertinoIcons.home,
                             color:
                                 currentTab == 0 ? primaryColor : Colors.black),
-                        Text('Home',
-                            style: TextStyle(
-                                color: currentTab == 0
-                                    ? primaryColor
-                                    : Colors.black))
+                        Text(
+                          'Home',
+                          style: TextStyle(
+                              color: currentTab == 0
+                                  ? primaryColor
+                                  : Colors.black),
+                        ),
                       ],
                     ),
                   ),
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
-                        currentScreen = const TimelinePage();
-                        currentTab = 1;
-                      });
+                      setState(
+                        () {
+                          currentScreen = const TimelinePage();
+                          currentTab = 1;
+                        },
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -85,11 +95,13 @@ class _BottomBarState extends State<BottomBar> {
                         Icon(CupertinoIcons.calendar,
                             color:
                                 currentTab == 1 ? primaryColor : Colors.black),
-                        Text('Timeline',
-                            style: TextStyle(
-                                color: currentTab == 1
-                                    ? primaryColor
-                                    : Colors.black))
+                        Text(
+                          'Timeline',
+                          style: TextStyle(
+                              color: currentTab == 1
+                                  ? primaryColor
+                                  : Colors.black),
+                        ),
                       ],
                     ),
                   )
@@ -100,10 +112,12 @@ class _BottomBarState extends State<BottomBar> {
                 children: [
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
-                        currentScreen = const GraphPage();
-                        currentTab = 2;
-                      });
+                      setState(
+                        () {
+                          currentScreen = const GraphPage();
+                          currentTab = 2;
+                        },
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -111,20 +125,24 @@ class _BottomBarState extends State<BottomBar> {
                         Icon(CupertinoIcons.chart_bar,
                             color:
                                 currentTab == 2 ? primaryColor : Colors.black),
-                        Text('Graph',
-                            style: TextStyle(
-                                color: currentTab == 2
-                                    ? primaryColor
-                                    : Colors.black))
+                        Text(
+                          'Graph',
+                          style: TextStyle(
+                              color: currentTab == 2
+                                  ? primaryColor
+                                  : Colors.black),
+                        ),
                       ],
                     ),
                   ),
                   MaterialButton(
                     onPressed: () {
-                      setState(() {
-                        currentScreen = const SettingsPage();
-                        currentTab = 3;
-                      });
+                      setState(
+                        () {
+                          currentScreen = const SettingsPage();
+                          currentTab = 3;
+                        },
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -132,16 +150,18 @@ class _BottomBarState extends State<BottomBar> {
                         Icon(CupertinoIcons.gear,
                             color:
                                 currentTab == 3 ? primaryColor : Colors.black),
-                        Text('Settings',
-                            style: TextStyle(
-                                color: currentTab == 3
-                                    ? primaryColor
-                                    : Colors.black))
+                        Text(
+                          'Settings',
+                          style: TextStyle(
+                              color: currentTab == 3
+                                  ? primaryColor
+                                  : Colors.black),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
