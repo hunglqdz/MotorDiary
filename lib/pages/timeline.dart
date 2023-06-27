@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/timeline/completed_events.dart';
 import 'package:motor_diary/timeline/missing_events.dart';
 import 'package:motor_diary/timeline/upcoming_events.dart';
@@ -46,7 +47,7 @@ class _TimelinePageState extends State<TimelinePage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 20),
                       decoration: BoxDecoration(
-                        color: index == 0 ? Colors.green : Colors.transparent,
+                        color: index == 0 ? primaryColor : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
@@ -68,7 +69,7 @@ class _TimelinePageState extends State<TimelinePage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 20),
                       decoration: BoxDecoration(
-                        color: index == 1 ? Colors.green : Colors.transparent,
+                        color: index == 1 ? primaryColor : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
@@ -90,7 +91,7 @@ class _TimelinePageState extends State<TimelinePage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 20),
                       decoration: BoxDecoration(
-                        color: index == 2 ? Colors.green : Colors.transparent,
+                        color: index == 2 ? primaryColor : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(

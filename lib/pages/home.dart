@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 import '../detail.dart';
 import '../detail2.dart';
@@ -20,9 +21,9 @@ class _HomePageState extends State<HomePage> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * .2,
-              decoration: const BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
@@ -45,8 +46,8 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.lightGreenAccent,
-                    border: Border.all(color: Colors.green, width: 5),
+                    color: Colors.pinkAccent,
+                    border: Border.all(color: primaryColor, width: 5),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Column(
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green, width: 2),
+                    border: Border.all(color: primaryColor, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Column(
@@ -140,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Colors.green),
+                        border: Border.all(width: 2, color: primaryColor),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Column(
@@ -206,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Colors.green),
+                        border: Border.all(width: 2, color: primaryColor),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Column(
