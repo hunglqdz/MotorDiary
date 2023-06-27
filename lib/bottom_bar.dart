@@ -43,7 +43,7 @@ class _BottomBarState extends State<BottomBar> {
             );
           },
           child: const Icon(CupertinoIcons.camera)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,

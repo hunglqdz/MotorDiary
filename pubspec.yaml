@@ -16,6 +16,7 @@ dependencies:
   shared_preferences: ^2.1.2
   image:
   flutter_tflite:
+  meta:
   fl_chart: ^0.63.0
 
 dev_dependencies:

@@ -82,7 +82,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 image: AssetImage(
                                   'assets/images/onboard1.png',
                                 ),
-                                fit: BoxFit.cover,
+                                height: 300,
+                                width: 300,
                               ),
                             ),
                             SizedBox(height: 30),
@@ -109,7 +110,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 image: AssetImage(
                                   'assets/images/onboard2.png',
                                 ),
-                                fit: BoxFit.cover,
+                                height: 300,
+                                width: 300,
                               ),
                             ),
                             SizedBox(height: 30),
@@ -136,7 +138,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 image: AssetImage(
                                   'assets/images/onboard3.jpg',
                                 ),
-                                fit: BoxFit.cover,
+                                height: 300,
+                                width: 300,
                               ),
                             ),
                             SizedBox(height: 30),

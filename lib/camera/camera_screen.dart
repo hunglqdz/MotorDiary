@@ -1,9 +1,7 @@
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:motor_diary/main.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
-import 'package:motor_diary/constant.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -13,92 +11,127 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  File? _image;
-  List? _output;
-  bool _loading = false;
-  final picker = ImagePicker();
+  CameraImage? cameraImage;
+  CameraController? cameraController;
+  String output = '';
 
   @override
   void initState() {
     super.initState();
-    _loading = true;
-    loadModel().then((value) {
-      setState(() {
-        _loading = false;
-      });
+    loadCamera();
+    loadModel();
+  }
+
+  loadCamera() {
+    cameraController = CameraController(cameras![0], ResolutionPreset.medium);
+    cameraController!.initialize().then((value) {
+      if (!mounted) {
+        return;
+      } else {
+        setState(() {
+          cameraController!.startImageStream((imageStream) {
+            cameraImage = imageStream;
+            runModel();
+          });
+        });
+      }
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  classifyImage(File image) async {
-    var output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 1,
-      threshold: 0.1,
-    );
-    setState(() {
-      _output = output!;
-      _loading = false;
-    });
-  }
-
-  pickImage() async {
-    var image = await picker.pickImage(source: ImageSource.camera);
-    if (image == null) return null;
-    setState(() {
-      _image = File(image.path);
-    });
-    classifyImage(_image!);
+  runModel() async {
+    if (cameraImage != null) {
+      var predictions = await Tflite.runModelOnFrame(
+          bytesList: cameraImage!.planes.map((plane) {
+            return plane.bytes;
+          }).toList(),
+          imageHeight: cameraImage!.height,
+          imageWidth: cameraImage!.width,
+          imageMean: 127.5,
+          imageStd: 127.5,
+          rotation: 90,
+          numResults: 2,
+          threshold: 0.1,
+          asynch: true);
+      for (var element in predictions!) {
+        setState(() {
+          output = element['label'].toString();
+        });
+      }
+    }
   }
 
   loadModel() async {
+    Tflite.close();
     await Tflite.loadModel(
         model: 'assets/model/detect.tflite',
         labels: 'assets/model/labelmap.txt');
   }
 
   @override
+  void dispose() {
+    cameraController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _loading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _image == null
-                    ? Container(
-                        height: 300,
-                      )
-                    : Image.file(
-                        _image!,
-                        height: 300,
-                      ),
-                const SizedBox(
-                  height: 16,
-                ),
-                _output == null
-                    ? const Text('No Prediction')
-                    : Text(
-                        'Prediction: ${_output![0]['label']}',
-                        style: const TextStyle(fontSize: 20),
-                      ),
-              ],
-            ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        foregroundColor: primaryColor,
-        onPressed: pickImage,
-        tooltip: 'Pick Image',
-        child: const Icon(CupertinoIcons.camera),
+      appBar: AppBar(
+        title: const Text('Awesome Camera'),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: Container(
+        color: Colors.grey.shade100,
+        padding: const EdgeInsets.only(top: 10, bottom: 30),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.65,
+                width: MediaQuery.of(context).size.width,
+                child: !cameraController!.value.isInitialized
+                    ? Container()
+                    : AspectRatio(
+                        aspectRatio: cameraController!.value.aspectRatio,
+                        child: CameraPreview(cameraController!),
+                      ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 4, right: 4),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                width: double.infinity,
+                height: 70,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Predicted the next odometer:',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      output,
+                      style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,9 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'onboard/onboarding_screen.dart';
 
 int? initScreen;
+List<CameraDescription>? cameras;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = prefs.getInt('initScreen');
   await prefs.setInt('initScreen', 1);
