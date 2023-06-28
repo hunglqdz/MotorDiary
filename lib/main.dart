@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:motor_diary/bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/route_manager.dart';
-import 'global_bindings.dart';
 import 'onboard/onboarding_screen.dart';
 
 int? initScreen;
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialBinding: GlobalBindings(),
       title: 'Motor Diary',
       theme: ThemeData(
         primarySwatch: Colors.pink,
