@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/route_manager.dart';
 import 'onboard/onboarding_screen.dart';
 
 int? initScreen;
@@ -10,7 +9,6 @@ List<CameraDescription>? cameras;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = prefs.getInt('initScreen');
   await prefs.setInt('initScreen', 1);
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Motor Diary',
       theme: ThemeData(
