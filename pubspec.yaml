@@ -16,7 +16,7 @@ dependencies:
   path_provider: ^2.0.15
   shared_preferences: ^2.1.2
   image: ^3.2.0
-  flutter_tflite: ^1.0.1
+  flutter_tflite:
   fl_chart: ^0.63.0
 
 dev_dependencies:
