@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -102,6 +102,7 @@ class _CameraScreenState extends State<CameraScreen> {
         },
         child: const Icon(CupertinoIcons.camera),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
