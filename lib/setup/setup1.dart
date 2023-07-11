@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/setup/setup2.dart';
-import '../user.dart';
+import 'package:motor_diary/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'setup_content.dart';
 
 class Setup1 extends StatefulWidget {
@@ -16,44 +16,38 @@ class Setup1 extends StatefulWidget {
 }
 
 class _Setup1State extends State<Setup1> {
-  final _nameController = TextEditingController();
-  final _vehicleController = TextEditingController();
-  User? _user;
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _vehicle = TextEditingController();
+
+  late SharedPreferences sharedPreferences;
 
   @override
   void initState() {
     super.initState();
-    _loadUser();
+    initialGetSavedData();
   }
 
-  Future<void> _loadUser() async {
-    try {
-      final file = File('user.json');
-      final json = await file.readAsString();
-      final user = User.fromJson(jsonDecode(json));
-      setState(() {
-        _user = user;
-      });
-    } catch (e) {
-      print('Failed to load user: $e');
+  void initialGetSavedData() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+
+    Map<String, dynamic> jsondatais =
+        jsonDecode(sharedPreferences.getString('userdata'));
+
+    User user = User.fromJson(jsondatais);
+
+    if (jsondatais.isNotEmpty) {
+      _name.value = TextEditingValue(text: user.name);
+      _vehicle.value = TextEditingValue(text: user.vehicle);
     }
   }
 
-  Future<void> _saveUser() async {
-    try {
-      final file = File('user.json');
-      final json = jsonEncode(_user!.toJson());
-      await file.writeAsString(json);
-    } catch (e) {
-      print('Failed to save user: $e');
-    }
-  }
+  void storeData() {
+    User user = User(_name.text, _vehicle.text);
 
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _vehicleController.dispose();
-    super.dispose();
+    String userdata = jsonEncode(user);
+    print(userdata);
+
+    sharedPreferences.setString('userdata', userdata);
   }
 
   @override
@@ -74,7 +68,7 @@ class _Setup1State extends State<Setup1> {
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
-              controller: _nameController,
+              controller: _name,
               maxLength: 30,
               decoration: const InputDecoration(
                 suffixIcon: Icon(CupertinoIcons.person),
@@ -86,7 +80,7 @@ class _Setup1State extends State<Setup1> {
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
-              controller: _vehicleController,
+              controller: _vehicle,
               maxLength: 30,
               decoration: const InputDecoration(
                 suffixIcon: Icon(Icons.motorcycle),
@@ -103,12 +97,9 @@ class _Setup1State extends State<Setup1> {
                 width: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    final name = _nameController.text;
-                    final vehicle = _vehicleController.text;
-                    setState(() {
-                      _user = User(name, vehicle);
-                    });
-                    _saveUser();
+                    print(_name.text);
+                    print(_vehicle.text);
+                    storeData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(

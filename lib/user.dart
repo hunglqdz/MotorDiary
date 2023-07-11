@@ -1,15 +1,11 @@
 class User {
-  final String name;
-  final String vehicle;
+  String name, vehicle;
 
   User(this.name, this.vehicle);
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'vehicle': vehicle,
-      };
+  User.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        vehicle = json['vehicle'];
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(json['name'], json['vehicle']);
-  }
+  Map<String, dynamic> toJson() => {'name': name, 'vehicle': vehicle};
 }
