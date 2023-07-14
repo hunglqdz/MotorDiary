@@ -116,7 +116,7 @@ class _Setup2State extends State<Setup2> {
               decoration: const InputDecoration(
                 suffixIcon: Icon(CupertinoIcons.wrench),
                 border: OutlineInputBorder(),
-                labelText: 'Time for Management (day)',
+                labelText: 'Time for Maintenance (day)',
               ),
             ),
           ),
@@ -128,7 +128,7 @@ class _Setup2State extends State<Setup2> {
               decoration: const InputDecoration(
                 suffixIcon: Icon(CupertinoIcons.wrench),
                 border: OutlineInputBorder(),
-                labelText: 'Distance for Management (km)',
+                labelText: 'Distance for Maintenance (km)',
               ),
             ),
           ),
