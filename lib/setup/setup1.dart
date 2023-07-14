@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/setup/setup2.dart';
-import 'package:motor_diary/user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'setup_content.dart';
 
 class Setup1 extends StatefulWidget {
@@ -16,40 +12,6 @@ class Setup1 extends StatefulWidget {
 }
 
 class _Setup1State extends State<Setup1> {
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _vehicle = TextEditingController();
-
-  late SharedPreferences sharedPreferences;
-
-  @override
-  void initState() {
-    super.initState();
-    initialGetSavedData();
-  }
-
-  void initialGetSavedData() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-
-    Map<String, dynamic> jsondatais =
-        jsonDecode(sharedPreferences.getString('userdata'));
-
-    User user = User.fromJson(jsondatais);
-
-    if (jsondatais.isNotEmpty) {
-      _name.value = TextEditingValue(text: user.name);
-      _vehicle.value = TextEditingValue(text: user.vehicle);
-    }
-  }
-
-  void storeData() {
-    User user = User(_name.text, _vehicle.text);
-
-    String userdata = jsonEncode(user);
-    print(userdata);
-
-    sharedPreferences.setString('userdata', userdata);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,24 +27,22 @@ class _Setup1State extends State<Setup1> {
               image: 'assets/images/illustration.jpg',
               title: 'Step 1/3',
               description: "Enter your name and your vehicle's name"),
-          Padding(
-            padding: const EdgeInsets.all(16),
+          const Padding(
+            padding: EdgeInsets.all(16),
             child: TextField(
-              controller: _name,
               maxLength: 30,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 suffixIcon: Icon(CupertinoIcons.person),
                 border: OutlineInputBorder(),
                 labelText: 'Your Name',
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
+          const Padding(
+            padding: EdgeInsets.all(16),
             child: TextField(
-              controller: _vehicle,
               maxLength: 30,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 suffixIcon: Icon(Icons.motorcycle),
                 border: OutlineInputBorder(),
                 labelText: "Your Vehicle's Name",
@@ -97,9 +57,6 @@ class _Setup1State extends State<Setup1> {
                 width: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    print(_name.text);
-                    print(_vehicle.text);
-                    storeData();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
