@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -12,6 +13,26 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen> {
   File? _image;
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadModel();
+  }
+
+  void loadModel() async {
+    await Tflite.loadModel(
+      model: 'assets/model/detect.tflite',
+      labels: 'assets/model/labelmap.txt',
+    );
+  }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    super.dispose();
+  }
 
   Future<void> _takePhoto() async {
     final picker = ImagePicker();
