@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'onboard/onboarding_screen.dart';
 
 int? initScreen;
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Motor Diary',
       theme: ThemeData(
         primarySwatch: Colors.pink,
+        fontFamily: 'Montserrat',
       ),
       initialRoute: initScreen == 0 || initScreen == null ? 'first' : '/',
       routes: {

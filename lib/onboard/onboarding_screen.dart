@@ -90,12 +90,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Text(
                               'Welcome to MotorDiary!',
                               style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             SizedBox(height: 30),
                             Text(
                               "Here you'll manage your private vehicle.",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           ],
                         ),
@@ -123,7 +128,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             SizedBox(height: 30),
                             Text(
                               'Keep up with important events by capturing odometer.',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           ],
                         ),
@@ -151,7 +159,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             SizedBox(height: 30),
                             Text(
                               'Illustrative graphs and more.',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           ],
                         ),
