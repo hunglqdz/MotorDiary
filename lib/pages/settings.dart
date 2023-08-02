@@ -15,7 +15,8 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Setting'),
+        title: const Text('Settings'),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,11 +29,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     border: Border.all(width: 5, color: primaryColor),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
                       const Text(
-                        'Number of records for predictor',
+                        'The number of records for predictor:',
                         style: TextStyle(fontSize: 18),
                       ),
                       const Divider(),
@@ -51,7 +52,9 @@ class _SettingsPageState extends State<SettingsPage> {
                               },
                             ),
                           ),
-                          const VerticalDivider(),
+                          const VerticalDivider(
+                            width: 1,
+                          ),
                           Flexible(
                             fit: FlexFit.loose,
                             child: RadioListTile(
@@ -65,7 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
                               },
                             ),
                           ),
-                          const VerticalDivider(),
+                          const VerticalDivider(
+                            width: 1,
+                          ),
                           Flexible(
                             fit: FlexFit.loose,
                             child: RadioListTile(

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/constant.dart';
 
-import '../detail.dart';
-import '../detail2.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -132,12 +129,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DetailPage1()));
-                    },
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
@@ -198,12 +190,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DetailPage2()));
-                    },
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(

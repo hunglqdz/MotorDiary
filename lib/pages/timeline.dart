@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/constant.dart';
-import 'package:motor_diary/timeline/completed_events.dart';
-import 'package:motor_diary/timeline/missing_events.dart';
-import 'package:motor_diary/timeline/upcoming_events.dart';
+
+import '../event/event_model.dart';
+import '../event/event_screen.dart';
+import '../service/database_helper.dart';
+import '../widget/event_widget.dart';
 
 class TimelinePage extends StatefulWidget {
   const TimelinePage({super.key});
@@ -12,105 +13,75 @@ class TimelinePage extends StatefulWidget {
 }
 
 class _TimelinePageState extends State<TimelinePage> {
-  int index = 0;
-  final eventTypes = [
-    const UpcomingEvents(),
-    const CompletedEvents(),
-    const MissingEvents()
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        index = 0;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: index == 0 ? primaryColor : Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'Upcoming',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: index == 0 ? Colors.white : Colors.black38),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        index = 1;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: index == 1 ? primaryColor : Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'Completed',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: index == 1 ? Colors.white : Colors.black38),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        index = 2;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: index == 2 ? primaryColor : Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'Missing',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: index == 2 ? Colors.white : Colors.black38),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            eventTypes[index],
-          ],
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Event list'),
+          centerTitle: true,
         ),
-      ),
-    );
+        body: FutureBuilder<List<Event>?>(
+          future: DatabaseHelper.getAllEvents(),
+          builder: (context, AsyncSnapshot<List<Event>?> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            } else if (snapshot.hasData) {
+              if (snapshot.data != null) {
+                return ListView.builder(
+                  itemBuilder: (context, index) => EventWidget(
+                    event: snapshot.data![index],
+                    onTap: () async {
+                      await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventScreen(
+                                    event: snapshot.data![index],
+                                  )));
+                      setState(() {});
+                    },
+                    onLongPress: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title:
+                                  const Text('You want to delete this event?'),
+                              actions: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.red)),
+                                  onPressed: () async {
+                                    await DatabaseHelper.deleteEvent(
+                                        snapshot.data![index]);
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: const Text('Yes'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('No'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                  ),
+                  itemCount: snapshot.data!.length,
+                );
+              }
+              return const Center(
+                child: Text('No events yet'),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ));
   }
 }

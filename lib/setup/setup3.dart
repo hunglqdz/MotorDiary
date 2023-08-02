@@ -1,8 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/camera/camera_screen.dart';
 import 'package:motor_diary/constant.dart';
+
 import 'setup_content.dart';
-import 'package:camera/camera.dart';
 
 class Setup3 extends StatefulWidget {
   const Setup3({super.key});
