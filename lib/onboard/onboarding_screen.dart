@@ -221,7 +221,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => const Setup1()));
+                      MaterialPageRoute(builder: (context) => Setup1()));
                 },
                 child: Center(
                   child: Padding(

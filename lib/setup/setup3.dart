@@ -45,7 +45,9 @@ class _Setup3State extends State<Setup3> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const CameraScreen()));
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                ),
                 child: const Text('TAKE PHOTO'),
               ),
             ),

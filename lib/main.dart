@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/bottom_bar.dart';
+import 'package:motor_diary/pages/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'onboard/onboarding_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const BottomBar(),
         'first': (context) => const OnboardingScreen(),
+        '/display': (context) => const SettingsPage(),
       },
     );
   }

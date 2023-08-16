@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../constant.dart';
+
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
 
@@ -86,10 +88,20 @@ class _CameraScreenState extends State<CameraScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: takePhoto,
-            child: const Text('Take Photo'),
-          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: SizedBox(
+              height: 60,
+              width: 150,
+              child: ElevatedButton(
+                onPressed: takePhoto,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                ),
+                child: const Text('TAKE PHOTO'),
+              ),
+            ),
+          )
         ],
       ),
     );

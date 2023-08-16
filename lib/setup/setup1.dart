@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/data_storage.dart';
 import 'package:motor_diary/setup/setup2.dart';
+import 'package:motor_diary/user.dart';
+
 import 'setup_content.dart';
 
-class Setup1 extends StatefulWidget {
-  const Setup1({super.key});
+class Setup1 extends StatelessWidget {
+  Setup1({super.key});
 
-  @override
-  State<Setup1> createState() => _Setup1State();
-}
+  final _nameController = TextEditingController();
+  final _vehicleController = TextEditingController();
 
-class _Setup1State extends State<Setup1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,22 +28,24 @@ class _Setup1State extends State<Setup1> {
               image: 'assets/images/illustration.jpg',
               title: 'Step 1/3',
               description: "Enter your name and your vehicle's name"),
-          const Padding(
-            padding: EdgeInsets.all(16),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: TextField(
+              controller: _nameController,
               maxLength: 30,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 suffixIcon: Icon(CupertinoIcons.person),
                 border: OutlineInputBorder(),
                 labelText: 'Your Name',
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(16),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: TextField(
+              controller: _vehicleController,
               maxLength: 30,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 suffixIcon: Icon(Icons.motorcycle),
                 border: OutlineInputBorder(),
                 labelText: "Your Vehicle's Name",
@@ -57,6 +60,11 @@ class _Setup1State extends State<Setup1> {
                 width: 60,
                 child: ElevatedButton(
                   onPressed: () {
+                    final name = _nameController.text;
+                    final vehicle = _vehicleController.text;
+                    final user = User(name, vehicle);
+                    DataStorage().saveUser(user);
+                    Navigator.pushNamed(context, '/display');
                     Navigator.push(
                         context,
                         MaterialPageRoute(
