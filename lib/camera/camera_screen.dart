@@ -34,11 +34,15 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future<void> loadModel() async {
-    String? res = await Tflite.loadModel(
-      model: 'assets/model/detect.tflite',
-      labels: 'assets/model/labelmap.txt',
-    );
-    print(res);
+    try {
+      String? res = await Tflite.loadModel(
+        model: 'assets/model/detect.tflite',
+        labels: 'assets/model/labelmap.txt',
+      );
+      print('Model loaded: $res');
+    } catch (e) {
+      print('Failed to load model: $e');
+    }
   }
 
   Future<void> takePhoto() async {
@@ -49,21 +53,21 @@ class _CameraScreenState extends State<CameraScreen> {
         setState(() {
           imageFile = file;
         });
-        runModelOnImage(imageFile!.path);
+        runObjectDetection(imageFile!.path);
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> runModelOnImage(String imagePath) async {
+  Future<List<dynamic>?> runObjectDetection(String imagePath) async {
     try {
-      var recognitions = await Tflite.runModelOnImage(
-        path: imagePath,
-      );
-      print(recognitions);
+      var recognitions =
+          await Tflite.detectObjectOnImage(path: imagePath, model: 'detect');
+      return recognitions;
     } catch (e) {
-      print(e);
+      print('Failed to run object detection: $e');
+      return [];
     }
   }
 

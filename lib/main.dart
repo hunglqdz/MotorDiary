@@ -1,20 +1,22 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/bottom_bar.dart';
-import 'package:motor_diary/pages/settings.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:motor_diary/auth_page.dart';
 
-import 'onboard/onboarding_screen.dart';
+import 'firebase_options.dart';
 
-int? initScreen;
+// int? initScreen;
 List<CameraDescription>? cameras;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  initScreen = prefs.getInt('initScreen');
-  await prefs.setInt('initScreen', 1);
-  print('initScreen $initScreen');
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // initScreen = prefs.getInt('initScreen');
+  // await prefs.setInt('initScreen', 1);
+  // print('initScreen $initScreen');
   runApp(const MyApp());
 }
 
@@ -30,12 +32,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.pink,
         fontFamily: 'Montserrat',
       ),
-      initialRoute: initScreen == 0 || initScreen == null ? 'first' : '/',
-      routes: {
-        '/': (context) => const BottomBar(),
-        'first': (context) => const OnboardingScreen(),
-        '/display': (context) => const SettingsPage(),
-      },
+      // initialRoute: initScreen == 0 || initScreen == null ? 'first' : '/',
+      // routes: {
+      //   '/': (context) => const BottomBar(),
+      //   'first': (context) => const AuthPage(),
+      //   '/display': (context) => const SettingsPage(),
+      // },
+      home: const AuthPage(),
     );
   }
 }

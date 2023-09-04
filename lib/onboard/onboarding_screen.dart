@@ -80,7 +80,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Center(
                               child: Image(
                                 image: AssetImage(
-                                  'assets/images/onboard1.png',
+                                  'assets/images/onboard.jpg',
                                 ),
                                 height: 300,
                                 width: 300,
@@ -113,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Center(
                               child: Image(
                                 image: AssetImage(
-                                  'assets/images/onboard2.png',
+                                  'assets/images/onboard.jpg',
                                 ),
                                 height: 300,
                                 width: 300,
@@ -144,7 +144,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Center(
                               child: Image(
                                 image: AssetImage(
-                                  'assets/images/onboard3.jpg',
+                                  'assets/images/onboard.jpg',
                                 ),
                                 height: 300,
                                 width: 300,

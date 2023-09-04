@@ -18,12 +18,13 @@ dependencies:
   image: ^3.2.0
   flutter_tflite: ^1.0.1
   fl_chart: ^0.63.0
-  sqflite: ^2.0.2
+  firebase_auth:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.3
 
 flutter:
   uses-material-design: true
