@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/auth_page.dart';
+import 'package:motor_diary/auth/main_page.dart';
 
 import 'firebase_options.dart';
 
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       //   'first': (context) => const AuthPage(),
       //   '/display': (context) => const SettingsPage(),
       // },
-      home: const AuthPage(),
+      home: const MainPage(),
     );
   }
 }
