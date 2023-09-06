@@ -20,6 +20,7 @@ dependencies:
   fl_chart: ^0.63.0
   firebase_auth:
   firebase_core:
+  timeline_tile:
 
 dev_dependencies:
   flutter_test:
