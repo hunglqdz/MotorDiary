@@ -18,12 +18,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: signUserOut,
-            icon: const Icon(Icons.logout),
-          ),
-        ],
+        backgroundColor: primaryColor,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Text('Sign Out'),
+            IconButton(
+              onPressed: signUserOut,
+              icon: const Icon(Icons.logout),
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -42,9 +47,10 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Hello, master',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
                 ),
               ),
             ),
@@ -54,10 +60,9 @@ class _HomePageState extends State<HomePage> {
               child: InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.pinkAccent,
-                    border: Border.all(color: primaryColor, width: 5),
+                    border: Border.all(color: primaryColor, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Column(
@@ -67,19 +72,19 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
                         child: Text(
                           'Last Record',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                       Row(
                         children: [
                           Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text('01 Jan 2023'),
+                            child: Text('Date: 01 Jan 2023'),
                           ),
                           Spacer(),
                           Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text('12345'),
+                            child: Text('Odo: 12345'),
                           )
                         ],
                       )
@@ -90,11 +95,11 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              padding: const EdgeInsets.all(16),
               child: InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     border: Border.all(color: primaryColor, width: 2),
                     borderRadius: BorderRadius.circular(10),
@@ -106,19 +111,19 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
                         child: Text(
                           'Estimated',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                       Row(
                         children: [
                           Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text('14 May 2023'),
+                            child: Text('Date: 14 May 2023'),
                           ),
                           Spacer(),
                           Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text('23456'),
+                            child: Text('Odo: 23456'),
                           )
                         ],
                       )
@@ -129,7 +134,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const Divider(),
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -144,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                   InkWell(
                     onTap: () {},
                     child: Container(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         border: Border.all(width: 2, color: primaryColor),
                         borderRadius: BorderRadius.circular(10),
@@ -156,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
                             child: Text(
                               'Oil Change',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
                           Row(
@@ -217,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
                             child: Text(
                               'Maintenance',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
                           Row(

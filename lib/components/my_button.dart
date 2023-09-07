@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
@@ -20,8 +21,8 @@ class MyButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: primaryColor,
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),

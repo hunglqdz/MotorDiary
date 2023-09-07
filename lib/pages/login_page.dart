@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/components/my_button.dart';
 import 'package:motor_diary/components/my_textfield.dart';
+import 'package:motor_diary/constant.dart';
 
 import '../forgot_pw_page.dart';
 
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             const Text(
               'Welcome user!',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 24,
               ),
             ),
             const SizedBox(height: 25),
@@ -119,7 +120,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       );
                     },
-                    child: const Text('Forgot Password?'),
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: primaryColor,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -137,11 +143,14 @@ class _LoginPageState extends State<LoginPage> {
                   'Not a member?',
                   style: TextStyle(),
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: 5),
                 TextButton(
                   onPressed: widget.showRegisterPage,
-                  child: const Text(
+                  child: Text(
                     'Register now',
+                    style: TextStyle(
+                      color: primaryColor,
+                    ),
                   ),
                 ),
               ],

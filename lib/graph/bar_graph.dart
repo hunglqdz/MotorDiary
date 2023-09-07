@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 import 'bar_data.dart';
 
@@ -20,10 +21,10 @@ class MyBarGraph extends StatelessWidget {
 
     return BarChart(
       BarChartData(
-        maxY: 20000,
+        maxY: 30000,
         minY: 0,
-        gridData: const FlGridData(show: false),
-        borderData: FlBorderData(show: false),
+        gridData: const FlGridData(show: true),
+        borderData: FlBorderData(show: true),
         titlesData: const FlTitlesData(
           show: true,
           topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -42,13 +43,13 @@ class MyBarGraph extends StatelessWidget {
                 barRods: [
                   BarChartRodData(
                     toY: data.y,
-                    color: Colors.amber,
+                    color: primaryColor,
                     width: 25,
                     borderRadius: BorderRadius.circular(5),
                     backDrawRodData: BackgroundBarChartRodData(
                       show: true,
-                      toY: 20000,
-                      color: Colors.grey[200],
+                      toY: 30000,
+                      color: Colors.white,
                     ),
                   ),
                 ],

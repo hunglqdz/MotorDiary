@@ -51,7 +51,7 @@ class _TimelinePageState extends State<TimelinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 25),
         child: ListView(
           children: const [
             MyTimelineTile(
@@ -60,13 +60,15 @@ class _TimelinePageState extends State<TimelinePage> {
               isPast: true,
               eventCard: Column(
                 children: [
-                  Text('Oil Change'),
-                  Row(
-                    children: [
-                      Text('Date: 22/11/2022'),
-                      Text('Odo: 34567'),
-                    ],
+                  Text(
+                    'Oil Change',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
+                  Spacer(),
+                  Text('Date: 22 Nov 2022'),
+                  Text('Odo: 34567'),
                 ],
               ),
             ),
@@ -76,13 +78,15 @@ class _TimelinePageState extends State<TimelinePage> {
               isPast: true,
               eventCard: Column(
                 children: [
-                  Text('Maintenance'),
-                  Row(
-                    children: [
-                      Text('Date: 22/10/2022'),
-                      Text('Odo: 33445'),
-                    ],
+                  Text(
+                    'Maintenance',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
+                  Spacer(),
+                  Text('Date: 22 Oct 2022'),
+                  Text('Odo: 33445'),
                 ],
               ),
             ),
@@ -92,13 +96,15 @@ class _TimelinePageState extends State<TimelinePage> {
               isPast: false,
               eventCard: Column(
                 children: [
-                  Text('Oil Change'),
-                  Row(
-                    children: [
-                      Text('Date: 22/1/2022'),
-                      Text('Odo: 29876'),
-                    ],
+                  Text(
+                    'Oil Change',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
+                  Spacer(),
+                  Text('Date: 22 Jan 2022'),
+                  Text('Odo: 29876'),
                 ],
               ),
             ),

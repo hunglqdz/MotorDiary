@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -43,8 +44,9 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 50),
             const Text(
               'Register below with your details!',
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 24,
               ),
             ),
             const SizedBox(height: 25),
@@ -72,11 +74,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   'I am a member!',
                   style: TextStyle(),
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: 5),
                 TextButton(
                   onPressed: widget.showLoginPage,
-                  child: const Text(
+                  child: Text(
                     'Login now',
+                    style: TextStyle(
+                      color: primaryColor,
+                    ),
                   ),
                 ),
               ],

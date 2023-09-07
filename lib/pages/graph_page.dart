@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 import '../graph/bar_graph.dart';
 
@@ -10,15 +11,22 @@ class GraphPage extends StatefulWidget {
 }
 
 class _GraphPageState extends State<GraphPage> {
-  List<double> odometer = [12345, 13579, 14725, 15978, 17935];
+  List<double> odometer = [
+    11234,
+    15976,
+    19746,
+    22093,
+    25739,
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: accentColor,
       body: Center(
         child: SizedBox(
-          height: 200,
+          height: 300,
+          width: 350,
           child: MyBarGraph(
             odometer: odometer,
           ),

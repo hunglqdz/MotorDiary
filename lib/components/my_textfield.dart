@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 class MyTextField extends StatelessWidget {
   final controller;
@@ -19,16 +20,16 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: primaryColor),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
+              borderSide: BorderSide(color: primaryColor),
             ),
-            fillColor: Colors.grey.shade200,
+            fillColor: Colors.white,
             filled: true,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey[500])),
+            hintStyle: const TextStyle(color: Colors.grey)),
       ),
     );
   }

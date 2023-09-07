@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/constant.dart';
 
 import 'components/my_textfield.dart';
 
@@ -45,7 +46,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -54,19 +57,27 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               child: Text(
                 'Enter your email and we will send you a password reset link',
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 25),
             MyTextField(
               controller: emailController,
               hintText: 'email',
               obscureText: false,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 25),
             MaterialButton(
               onPressed: passwordReset,
-              color: Colors.deepPurple[200],
-              child: const Text('Reset Password'),
+              color: primaryColor,
+              child: const Text(
+                'Reset Password',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ),
           ],
         ));

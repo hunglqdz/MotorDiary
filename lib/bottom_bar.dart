@@ -32,17 +32,21 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       body: PageStorage(bucket: bucket, child: currentScreen),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          foregroundColor: primaryColor,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CameraScreen(),
-              ),
-            );
-          },
-          child: const Icon(CupertinoIcons.camera)),
+        backgroundColor: Colors.black,
+        foregroundColor: primaryColor,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CameraScreen(),
+            ),
+          );
+        },
+        child: const Icon(
+          CupertinoIcons.camera,
+          size: 30,
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

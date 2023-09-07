@@ -24,14 +24,13 @@ class MyTimelineTile extends StatelessWidget {
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
-        beforeLineStyle:
-            LineStyle(color: isPast ? primaryColor : outdatedColor),
+        beforeLineStyle: LineStyle(color: isPast ? primaryColor : accentColor),
         indicatorStyle: IndicatorStyle(
           width: 40,
-          color: isPast ? primaryColor : outdatedColor,
+          color: isPast ? primaryColor : accentColor,
           iconStyle: IconStyle(
             iconData: Icons.done,
-            color: isPast ? Colors.white : outdatedColor,
+            color: isPast ? Colors.white : accentColor,
           ),
         ),
         endChild: EventCard(
