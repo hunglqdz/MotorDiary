@@ -17,19 +17,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Text('Sign Out'),
-            IconButton(
-              onPressed: signUserOut,
-              icon: const Icon(Icons.logout),
-            ),
-          ],
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

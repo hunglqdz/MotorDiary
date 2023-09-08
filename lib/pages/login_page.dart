@@ -1,163 +1,107 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/components/my_button.dart';
-import 'package:motor_diary/components/my_textfield.dart';
+import 'package:motor_diary/bottom_bar.dart';
 import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/pages/signup_page.dart';
 
-import '../forgot_pw_page.dart';
+import '../widgets/my_button.dart';
+import '../widgets/my_textfield.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  const LoginPage({super.key, required this.showRegisterPage});
+class LogInPage extends StatefulWidget {
+  const LogInPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LogInPage> createState() => _LogInPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  void signUserIn() async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-      if (e.code == 'user-not-found') {
-        wrongEmailMessage();
-      } else if (e.code == 'wrong-password') {
-        wrongPasswordMessage();
-      }
-    }
-  }
-
-  void wrongEmailMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          content: Text('Incorrect Email'),
-        );
-      },
-    );
-  }
-
-  void wrongPasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          content: Text('Incorrect Password'),
-        );
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+class _LogInPageState extends State<LogInPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 50),
-            const Icon(
-              Icons.smart_toy,
-              size: 100,
-            ),
-            const SizedBox(height: 50),
-            const Text(
-              'Welcome user!',
-              style: TextStyle(
-                fontSize: 24,
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        height: double.infinity,
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: [primaryColor, Colors.white, primaryColor],
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //     stops: const [0.25, 0.5, 0.75],
+        //   ),
+        // ),
+        color: primaryColor,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // illustrationWidget('assets/images/illustration.jpg'),
+              const Icon(Icons.motorcycle, size: 200),
+              const SizedBox(height: 150),
+              myTextField(
+                'Enter Email Address',
+                Icons.email,
+                false,
+                emailController,
               ),
-            ),
-            const SizedBox(height: 25),
-            MyTextField(
-              controller: emailController,
-              hintText: 'email',
-              obscureText: false,
-            ),
-            const SizedBox(height: 10),
-            MyTextField(
-              controller: passwordController,
-              hintText: 'password',
-              obscureText: true,
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const ForgotPasswordPage();
-                          },
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 20),
+              myTextField(
+                'Enter Password',
+                Icons.lock,
+                true,
+                passwordController,
               ),
-            ),
-            const SizedBox(height: 25),
-            MyButton(
-              onTap: signUserIn,
-              text: 'Sign In',
-            ),
-            const SizedBox(height: 50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Not a member?',
-                  style: TextStyle(),
-                ),
-                const SizedBox(width: 5),
-                TextButton(
-                  onPressed: widget.showRegisterPage,
-                  child: Text(
-                    'Register now',
-                    style: TextStyle(
-                      color: primaryColor,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+              const SizedBox(height: 20),
+              myButton(context, true, () {
+                FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                  email: emailController.text,
+                  password: passwordController.text,
+                )
+                    .then((value) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BottomBar()));
+                }).onError((error, stackTrace) {
+                  print('Error ${error.toString()}');
+                });
+              }),
+              signUpOption(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Row signUpOption() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "Don't have account?",
+          style: TextStyle(color: Colors.white70),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SignUpPage(),
+              ),
+            );
+          },
+          child: const Text(
+            ' Sign Up',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

@@ -9,19 +9,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.5
-  camera: ^0.10.5+2
-  image_picker: ^0.8.8
+  cupertino_icons: ^1.0.6
+  camera: ^0.10.5+4
+  image_picker: ^0.8.5+3
   provider: ^6.0.5
-  path_provider: ^2.0.15
-  shared_preferences:
+  path_provider: ^2.1.1
+  shared_preferences: ^2.2.1
   image: ^3.2.0
   flutter_tflite: ^1.0.1
   fl_chart: ^0.63.0
-  firebase_auth:
-  firebase_core:
-  firebase_messaging:
-  timeline_tile:
+  firebase_auth: ^4.9.0
+  firebase_core: ^2.15.1
+  firebase_messaging: ^14.6.7
+  firebase_storage: ^11.2.6
+  firebase_database: ^10.2.5
+  timeline_tile: ^2.0.0
 
 dev_dependencies:
   flutter_test:
