@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/pages/settings_page.dart';
 
-import 'camera/camera_screen.dart';
-import 'pages/graph_page.dart';
-import 'pages/home_page.dart';
-import 'pages/settings_page.dart';
-import 'pages/timeline_page.dart';
+import '../camera/camera_screen.dart';
+import '../pages/graph_page.dart';
+import '../pages/home_page.dart';
+import '../pages/timeline_page.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});

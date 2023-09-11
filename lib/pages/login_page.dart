@@ -1,107 +1,179 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/bottom_bar.dart';
 import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/pages/profile_page.dart';
 import 'package:motor_diary/pages/signup_page.dart';
 
-import '../widgets/my_button.dart';
-import '../widgets/my_textfield.dart';
+import '../fire_auth.dart';
+import '../validator.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+
+  bool _isProcessing = false;
+
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(
+            user: user,
+          ),
+        ),
+      );
+    }
+
+    return firebaseApp;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        height: double.infinity,
-        // decoration: BoxDecoration(
-        //   gradient: LinearGradient(
-        //     colors: [primaryColor, Colors.white, primaryColor],
-        //     begin: Alignment.topCenter,
-        //     end: Alignment.bottomCenter,
-        //     stops: const [0.25, 0.5, 0.75],
-        //   ),
-        // ),
-        color: primaryColor,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // illustrationWidget('assets/images/illustration.jpg'),
-              const Icon(Icons.motorcycle, size: 200),
-              const SizedBox(height: 150),
-              myTextField(
-                'Enter Email Address',
-                Icons.email,
-                false,
-                emailController,
-              ),
-              const SizedBox(height: 20),
-              myTextField(
-                'Enter Password',
-                Icons.lock,
-                true,
-                passwordController,
-              ),
-              const SizedBox(height: 20),
-              myButton(context, true, () {
-                FirebaseAuth.instance
-                    .signInWithEmailAndPassword(
-                  email: emailController.text,
-                  password: passwordController.text,
-                )
-                    .then((value) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BottomBar()));
-                }).onError((error, stackTrace) {
-                  print('Error ${error.toString()}');
-                });
-              }),
-              signUpOption(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 24.0),
+                    child: Text(
+                      'Login',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: _emailTextController,
+                          validator: (value) => Validator.validateEmail(
+                            email: value!,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6),
+                              borderSide: BorderSide(
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _passwordTextController,
+                          obscureText: true,
+                          validator: (value) => Validator.validatePassword(
+                            password: value!,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "Password",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6),
+                              borderSide: BorderSide(
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        _isProcessing
+                            ? const CircularProgressIndicator()
+                            : Column(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          setState(() {
+                                            _isProcessing = true;
+                                          });
 
-  Row signUpOption() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          "Don't have account?",
-          style: TextStyle(color: Colors.white70),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SignUpPage(),
+                                          User? user = await FireAuth
+                                              .signInUsingEmailPassword(
+                                            email: _emailTextController.text,
+                                            password:
+                                                _passwordTextController.text,
+                                            context: context,
+                                          );
+
+                                          setState(() {
+                                            _isProcessing = false;
+                                          });
+
+                                          if (user != null) {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProfilePage(user: user),
+                                              ),
+                                            );
+                                          }
+                                        }
+                                      },
+                                      child: const Text(
+                                        'Log In',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  Row(
+                                    children: [
+                                      const Text('New user?'),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const SignupPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: const Text(
+                                          'Sign Up',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                      ],
+                    ),
+                  )
+                ],
               ),
             );
-          },
-          child: const Text(
-            ' Sign Up',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        )
-      ],
+          }
+
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }

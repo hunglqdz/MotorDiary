@@ -1,22 +1,8 @@
-import 'package:camera/camera.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/api/firebase_api.dart';
-import 'package:motor_diary/camera/camera_screen.dart';
 import 'package:motor_diary/constant.dart';
-import 'package:motor_diary/notification_screen.dart';
+import 'package:motor_diary/welcome_screen.dart';
 
-import 'firebase_options.dart';
-
-List<CameraDescription>? cameras;
-final navigatorKey = GlobalKey<NavigatorState>();
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await FirebaseApi().initNotifications();
+void main() {
   runApp(const MyApp());
 }
 
@@ -30,13 +16,10 @@ class MyApp extends StatelessWidget {
       title: 'Motor Diary',
       theme: ThemeData(
         primaryColor: primaryColor,
+        primarySwatch: Colors.teal,
         fontFamily: 'Montserrat',
       ),
-      navigatorKey: navigatorKey,
-      routes: {
-        'notification_screen': (context) => const NotificationScreen(),
-      },
-      home: const CameraScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }
