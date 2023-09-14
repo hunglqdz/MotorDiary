@@ -10,9 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
-  }
+  final User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +28,10 @@ class _HomePageState extends State<HomePage> {
                   bottomRight: Radius.circular(20),
                 ),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Hello, master',
-                  style: TextStyle(
+                  'Welcome, ${user!.email}',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30,

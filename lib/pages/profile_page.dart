@@ -1,70 +1,43 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/auth.dart';
 
-import 'login_page.dart';
+class ProfilePage extends StatelessWidget {
+  ProfilePage({super.key});
 
-class ProfilePage extends StatefulWidget {
-  final User user;
+  final User? user = Auth().currentUser;
 
-  const ProfilePage({super.key, required this.user});
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
+  Widget _userUid() {
+    return Text(user?.email ?? 'User email');
+  }
 
-class _ProfilePageState extends State<ProfilePage> {
-  bool _isSigningOut = false;
-
-  late User _currentUser;
-
-  @override
-  void initState() {
-    _currentUser = widget.user;
-    super.initState();
+  Widget _signOutButton() {
+    return ElevatedButton(
+      onPressed: signOut,
+      child: const Text('Sign Out'),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Profile Page'),
+      ),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'NAME: ${_currentUser.displayName}',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'EMAIL: ${_currentUser.email}',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 16),
-            _isSigningOut
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: () async {
-                      setState(() {
-                        _isSigningOut = true;
-                      });
-                      await FirebaseAuth.instance.signOut();
-                      setState(() {
-                        _isSigningOut = false;
-                      });
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: const Text('Sign Out'),
-                  ),
+            _userUid(),
+            _signOutButton(),
           ],
         ),
       ),
