@@ -1,6 +1,9 @@
-import 'package:camera/camera.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_tflite/flutter_tflite.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pytorch_mobile/model.dart';
+import 'package:pytorch_mobile/pytorch_mobile.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -10,77 +13,78 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  late CameraController _controller;
-
-  Future<void> _initializeCamera() async {
-    final cameras = await availableCameras();
-    final camera = cameras.first;
-    _controller = CameraController(camera, ResolutionPreset.medium);
-    await _controller.initialize();
-    if (!mounted) {
-      return;
-    }
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeCamera();
-  }
-
-  void _capturePhoto() async {
-    if (!_controller.value.isInitialized) {
-      return;
-    }
-    final image = await _controller.takePicture();
-    // Call the method to process the captured image
-    processImage(image.path);
-  }
-
-  void processImage(String imagePath) async {
-    // Load the TFLite model
-    await Tflite.loadModel(
-      model: 'assets/model/yolov4-416-fp16.tflite',
-      labels: 'assets/model/labelmap.txt',
-    );
-
-    // Run object detection on the image
-    final recognition = await Tflite.runModelOnImage(
-      path: imagePath,
-      numResults: 10,
-      threshold: 0.4,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-
-    // Process the recognition results
-    print(recognition);
-
-    // Dispose the TFLite model
-    Tflite.close();
-  }
+  late File imageFile;
 
   @override
   Widget build(BuildContext context) {
-    if (!_controller.value.isInitialized) {
-      return Container();
-    }
-    return Column(
-      children: [
-        SizedBox(
-          width: 300,
-          height: 300,
-          child: AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: CameraPreview(_controller),
-          ),
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Camera Screen"),
         ),
-        ElevatedButton(
-          onPressed: _capturePhoto,
-          child: const Text('Capture photo'),
-        ),
-      ],
+        body: Container(
+            child: imageFile == null
+                ? Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            _getFromGallery();
+                          },
+                          child: const Text("PICK FROM GALLERY"),
+                        ),
+                        Container(
+                          height: 40.0,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            _getFromCamera();
+                          },
+                          child: const Text("PICK FROM CAMERA"),
+                        )
+                      ],
+                    ),
+                  )
+                : Image.file(
+                    imageFile,
+                    fit: BoxFit.cover,
+                  )));
+  }
+
+  /// Get from gallery
+  _getFromGallery() async {
+    XFile? pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
     );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+    Model model = await PyTorchMobile.loadModel('assets/models/best.pt');
+    String prediction = await model.getImagePrediction(
+        imageFile, 416, 416, 'assets/models/labelmap.txt');
+    print(prediction);
+  }
+
+  /// Get from Camera
+  _getFromCamera() async {
+    XFile? pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+    Model model = await PyTorchMobile.loadModel('assets/models/best.pt');
+    String prediction = await model.getImagePrediction(
+        imageFile, 416, 416, 'assets/models/labelmap.txt');
+    print(prediction);
   }
 }

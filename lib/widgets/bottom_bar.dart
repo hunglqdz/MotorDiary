@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/pages/settings_page.dart';
+import 'package:motor_diary/widgets/constant.dart';
 
 import '../camera/camera_screen.dart';
 import '../pages/graph_page.dart';

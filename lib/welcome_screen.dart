@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/pages/login_page.dart';
+import 'package:motor_diary/widgets/constant.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

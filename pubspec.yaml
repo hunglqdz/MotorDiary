@@ -25,6 +25,10 @@ dependencies:
   firebase_database: ^10.2.5
   cloud_firestore: ^4.9.1
   timeline_tile: ^2.0.0
+  pytorch_lite:
+  flutter_pytorch:
+  pytorch_mobile:
+  path:
 
 dev_dependencies:
   flutter_test:
@@ -35,7 +39,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/model/
+    - assets/models/
   fonts:
     - family: Montserrat
       fonts:

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_diary/components/event_card.dart';
-import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/widgets/constant.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class MyTimelineTile extends StatelessWidget {

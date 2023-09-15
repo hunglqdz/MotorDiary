@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/constant.dart';
 import 'package:motor_diary/pages/signup_page.dart';
 import 'package:motor_diary/widgets/bottom_bar.dart';
+import 'package:motor_diary/widgets/constant.dart';
 
 import '../utils/fire_auth.dart';
 import '../utils/validator.dart';

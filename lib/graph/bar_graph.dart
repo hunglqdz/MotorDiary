@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/constant.dart';
+import 'package:motor_diary/widgets/constant.dart';
 
 import 'bar_data.dart';
 
