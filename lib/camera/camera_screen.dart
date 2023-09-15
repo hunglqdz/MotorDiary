@@ -1,9 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
-import 'package:image_picker/image_picker.dart';
-
-import '../constant.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -13,111 +10,77 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  List<CameraDescription>? cameras;
-  CameraController? controller;
-  XFile? imageFile;
+  late CameraController _controller;
+
+  Future<void> _initializeCamera() async {
+    final cameras = await availableCameras();
+    final camera = cameras.first;
+    _controller = CameraController(camera, ResolutionPreset.medium);
+    await _controller.initialize();
+    if (!mounted) {
+      return;
+    }
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
-    initializeCamera();
-    loadModel();
+    _initializeCamera();
   }
 
-  Future<void> initializeCamera() async {
-    cameras = await availableCameras();
-    controller = CameraController(
-      cameras![0],
-      ResolutionPreset.medium,
+  void _capturePhoto() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+    final image = await _controller.takePicture();
+    // Call the method to process the captured image
+    processImage(image.path);
+  }
+
+  void processImage(String imagePath) async {
+    // Load the TFLite model
+    await Tflite.loadModel(
+      model: 'assets/model/yolov4-416-fp16.tflite',
+      labels: 'assets/model/labelmap.txt',
     );
-    await controller?.initialize();
-  }
 
-  Future<void> loadModel() async {
-    try {
-      String? res = await Tflite.loadModel(
-        model: 'assets/model/detect.tflite',
-        labels: 'assets/model/labelmap.txt',
-      );
-      print('Model loaded: $res');
-    } catch (e) {
-      print('Failed to load model: $e');
-    }
-  }
+    // Run object detection on the image
+    final recognition = await Tflite.runModelOnImage(
+      path: imagePath,
+      numResults: 10,
+      threshold: 0.4,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
 
-  Future<void> takePhoto() async {
-    try {
-      final XFile? file =
-          await ImagePicker().pickImage(source: ImageSource.camera);
-      if (file != null) {
-        setState(() {
-          imageFile = file;
-        });
-        runObjectDetection(imageFile!.path);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+    // Process the recognition results
+    print(recognition);
 
-  Future<List<dynamic>?> runObjectDetection(String imagePath) async {
-    try {
-      var recognitions =
-          await Tflite.detectObjectOnImage(path: imagePath, model: 'detect');
-      return recognitions;
-    } catch (e) {
-      print('Failed to run object detection: $e');
-      return [];
-    }
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
+    // Dispose the TFLite model
     Tflite.close();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Awesome Camera'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              child: cameraPreviewWidget(),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: SizedBox(
-              height: 60,
-              width: 150,
-              child: ElevatedButton(
-                onPressed: takePhoto,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
-                ),
-                child: const Text('TAKE PHOTO'),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget cameraPreviewWidget() {
-    if (controller == null || !controller!.value.isInitialized) {
+    if (!_controller.value.isInitialized) {
       return Container();
     }
-    return AspectRatio(
-      aspectRatio: controller!.value.aspectRatio,
-      child: CameraPreview(controller!),
+    return Column(
+      children: [
+        SizedBox(
+          width: 300,
+          height: 300,
+          child: AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: CameraPreview(_controller),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: _capturePhoto,
+          child: const Text('Capture photo'),
+        ),
+      ],
     );
   }
 }

@@ -31,10 +31,11 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                 child: Text(
                   'Welcome, ${user!.email}',
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 16,
                   ),
                 ),
               ),
