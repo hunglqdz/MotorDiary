@@ -43,7 +43,7 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.tag_faces, size: 100),
+                Image.asset('assets/icon/icon.png', width: 200, height: 200),
                 const SizedBox(height: 10),
                 Form(
                   key: _registerFormKey,
