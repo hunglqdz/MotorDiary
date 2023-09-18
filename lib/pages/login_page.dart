@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/pages/forgot_password_page.dart';
 import 'package:motor_diary/pages/signup_page.dart';
 import 'package:motor_diary/widgets/bottom_bar.dart';
 import 'package:motor_diary/widgets/constant.dart';
@@ -18,8 +19,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _emailTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
@@ -32,7 +33,8 @@ class _LoginPageState extends State<LoginPage> {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      Navigator.of(context).pushReplacement(
+      Navigator.push(
+        context,
         MaterialPageRoute(
           builder: (context) => const BottomBar(),
         ),
@@ -40,6 +42,13 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return firebaseApp;
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -60,17 +69,17 @@ class _LoginPageState extends State<LoginPage> {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset('assets/icon/icon.png',
-                        width: 200, height: 200),
+                        width: 150, height: 150),
                     const SizedBox(height: 10),
                     Form(
                       key: _formKey,
                       child: Column(
-                        children: <Widget>[
+                        children: [
                           TextFormField(
-                            controller: _emailTextController,
+                            controller: _emailController,
                             focusNode: _focusEmail,
                             validator: (value) => Validator.validateEmail(
                               email: value,
@@ -87,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
-                            controller: _passwordTextController,
+                            controller: _passwordController,
                             focusNode: _focusPassword,
                             obscureText: true,
                             validator: (value) => Validator.validatePassword(
@@ -103,69 +112,85 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 10),
                           _isProcessing
                               ? const CircularProgressIndicator()
-                              : Row(
+                              : Column(
                                   children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          _focusEmail.unfocus();
-                                          _focusPassword.unfocus();
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton.icon(
+                                            onPressed: () async {
+                                              _focusEmail.unfocus();
+                                              _focusPassword.unfocus();
 
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            setState(() {
-                                              _isProcessing = true;
-                                            });
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                setState(() {
+                                                  _isProcessing = true;
+                                                });
 
-                                            User? user = await FireAuth
-                                                .signInUsingEmailPassword(
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
-                                            );
+                                                User? user = await FireAuth
+                                                    .signInUsingEmailPassword(
+                                                  email: _emailController.text,
+                                                  password:
+                                                      _passwordController.text,
+                                                );
 
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
+                                                setState(() {
+                                                  _isProcessing = false;
+                                                });
 
-                                            if (user != null) {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const BottomBar(),
-                                                ),
-                                              );
-                                            }
-                                          }
-                                        },
-                                        child: const Text(
-                                          'Log In',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    const Text('New user?'),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SignupPage(),
+                                                if (user != null) {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const BottomBar(),
+                                                    ),
+                                                  );
+                                                }
+                                              }
+                                            },
+                                            label: const Text('Log In'),
+                                            icon: const Icon(Icons.lock_open),
                                           ),
-                                        );
+                                        ),
+                                        const SizedBox(width: 10),
+                                        const Text('New user?'),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const SignupPage(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            'Sign Up',
+                                            style:
+                                                TextStyle(color: primaryColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ForgotPasswordPage()));
                                       },
                                       child: Text(
-                                        'Sign Up',
+                                        'Forgot Password',
                                         style: TextStyle(color: primaryColor),
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                         ],
                       ),
                     )

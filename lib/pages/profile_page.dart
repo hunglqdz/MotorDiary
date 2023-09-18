@@ -105,7 +105,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       setState(() {
                         _isSigningOut = false;
                       });
-                      Navigator.of(context).pushReplacement(
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(
                           builder: (context) => const LoginPage(),
                         ),

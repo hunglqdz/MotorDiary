@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Center(
                 child: Text(
-                  'Welcome, ${user!.email}',
+                  'Welcome, ${user!.displayName}',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
