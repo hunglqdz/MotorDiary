@@ -110,7 +110,7 @@ class _CameraScreenState extends State<CameraScreen> {
     }
     Model model = await PyTorchMobile.loadModel('assets/models/best.pt');
     String prediction = await model.getImagePrediction(
-        imageFile!, 416, 416, 'assets/models/labelmap.txt');
+        imageFile!, 416, 416, 'assets/models/labelmap.csv');
     print(prediction);
   }
 
@@ -128,7 +128,7 @@ class _CameraScreenState extends State<CameraScreen> {
     }
     Model model = await PyTorchMobile.loadModel('assets/models/best.pt');
     String prediction = await model.getImagePrediction(
-        imageFile!, 416, 416, 'assets/models/labelmap.txt');
+        imageFile!, 416, 416, 'assets/models/labelmap.csv');
     print(prediction);
   }
 }
