@@ -27,9 +27,9 @@ dependencies:
   timeline_tile: ^2.0.0
   pytorch_lite:
   pytorch_mobile:
-  flutter_settings_screens:
   path:
   salomon_bottom_bar:
+  flutter_local_notifications:
 
 dev_dependencies:
   flutter_test:
