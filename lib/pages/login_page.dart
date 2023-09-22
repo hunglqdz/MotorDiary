@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/pages/forgot_password_page.dart';
 import 'package:motor_diary/pages/signup_page.dart';
@@ -154,7 +155,8 @@ class _LoginPageState extends State<LoginPage> {
                                               }
                                             },
                                             label: const Text('Log In'),
-                                            icon: const Icon(Icons.lock_open),
+                                            icon: const Icon(
+                                                CupertinoIcons.lock_open),
                                           ),
                                         ),
                                         const SizedBox(width: 10),
@@ -177,8 +179,8 @@ class _LoginPageState extends State<LoginPage> {
                                       ],
                                     ),
                                     const SizedBox(height: 10),
-                                    GestureDetector(
-                                      onTap: () {
+                                    TextButton(
+                                      onPressed: () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>

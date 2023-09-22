@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/widgets/bottom_bar.dart';
 
@@ -144,7 +145,7 @@ class _SignupPageState extends State<SignupPage> {
                                       }
                                     },
                                     label: const Text('Sign Up'),
-                                    icon: const Icon(Icons.app_registration),
+                                    icon: const Icon(CupertinoIcons.check_mark),
                                   ),
                                 ),
                               ],
