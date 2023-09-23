@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motor_diary/pages/login_page.dart';
 import 'package:motor_diary/pages/profile_page.dart';
 import 'package:motor_diary/widgets/constant.dart';
 
@@ -12,80 +13,90 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool enableNotifications = false;
+  final User? user = FirebaseAuth.instance.currentUser;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  bool enableNotifications = true;
   String? selectedNumOfRecords;
   final List<String> numOfRecords = ['5', '10', '15'];
+
+  signOut() async {
+    await auth.signOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: ListView(
-            children: [
-              _SingleSection(
-                title: "General",
-                children: [
-                  _CustomListTile(
-                    title: const Text("Notifications"),
-                    icon: Icon(CupertinoIcons.bell, color: primaryColor),
-                    trailing: Switch(
-                        value: enableNotifications,
-                        onChanged: (value) {
-                          setState(() {
-                            enableNotifications = value;
-                          });
-                        }),
-                    subtitle: '',
-                  ),
-                ],
-              ),
-              const Divider(),
-              _SingleSection(
-                title: "Organization",
-                children: [
-                  _CustomListTile(
-                    title: const Text("Profile"),
-                    icon: Icon(CupertinoIcons.person, color: primaryColor),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProfilePage(
-                              user: null,
-                            ),
-                          ));
-                    },
-                    subtitle: '',
-                  ),
-                  _CustomListTile(
-                    title: const Text("Predictor"),
-                    subtitle: 'Number of records for prediction',
-                    icon: Icon(
-                      CupertinoIcons.gauge,
-                      color: primaryColor,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: ListView(
+              children: [
+                _SingleSection(
+                  title: "General",
+                  children: [
+                    _CustomListTile(
+                      title: const Text("Notifications"),
+                      icon: Icon(CupertinoIcons.bell, color: primaryColor),
+                      trailing: Switch(
+                          value: enableNotifications,
+                          onChanged: (value) {
+                            setState(() {
+                              enableNotifications = value;
+                            });
+                          }),
+                      subtitle: '',
                     ),
-                    trailing: dropDown(),
-                  ),
-                ],
-              ),
-              const Divider(),
-              _SingleSection(
-                children: [
-                  _CustomListTile(
-                    title: const Text("Sign out",
-                        style: TextStyle(color: Colors.red)),
-                    icon: const Icon(CupertinoIcons.return_icon,
-                        color: Colors.red),
-                    onTap: () {
-                      FirebaseAuth.instance.signOut();
-                    },
-                    subtitle: '',
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                const Divider(),
+                _SingleSection(
+                  title: "Organization",
+                  children: [
+                    _CustomListTile(
+                      title: const Text("Profile"),
+                      icon: Icon(CupertinoIcons.person, color: primaryColor),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfilePage(
+                                user: user,
+                              ),
+                            ));
+                      },
+                      subtitle: '',
+                    ),
+                    _CustomListTile(
+                      title: const Text("Predictor"),
+                      subtitle: 'Number of records for prediction',
+                      icon: Icon(
+                        CupertinoIcons.gauge,
+                        color: primaryColor,
+                      ),
+                      trailing: dropDown(),
+                    ),
+                  ],
+                ),
+                const Divider(),
+                _SingleSection(
+                  children: [
+                    _CustomListTile(
+                      title: const Text("Sign out",
+                          style: TextStyle(color: Colors.red)),
+                      icon: const Icon(CupertinoIcons.return_icon,
+                          color: Colors.red),
+                      onTap: signOut,
+                      subtitle: '',
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

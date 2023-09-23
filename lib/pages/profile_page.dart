@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../utils/fire_auth.dart';
-import 'login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final User? user;
@@ -14,114 +12,82 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool _isSendingVerification = false;
-  bool _isSigningOut = false;
+  final User? user = FirebaseAuth.instance.currentUser;
 
-  late User _currentUser;
-
-  @override
-  void initState() {
-    _currentUser = widget.user!;
-    super.initState();
-  }
+  final controller1 = TextEditingController();
+  final controller2 = TextEditingController();
+  final controller3 = TextEditingController();
+  final controller4 = TextEditingController();
+  final controller5 = TextEditingController();
+  final controller6 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'NAME: ${_currentUser.displayName}',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'EMAIL: ${_currentUser.email}',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 16),
-            _currentUser.emailVerified
-                ? Text(
-                    'Email verified',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.green),
-                  )
-                : Text(
-                    'Email not verified',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.red),
-                  ),
-            const SizedBox(height: 16),
-            _isSendingVerification
-                ? const CircularProgressIndicator()
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          setState(() {
-                            _isSendingVerification = true;
-                          });
-                          await _currentUser.sendEmailVerification();
-                          setState(() {
-                            _isSendingVerification = false;
-                          });
-                        },
-                        child: const Text('Verify email'),
-                      ),
-                      const SizedBox(width: 8),
-                      IconButton(
-                        icon: const Icon(Icons.refresh),
-                        onPressed: () async {
-                          User? user = await FireAuth.refreshUser(_currentUser);
-
-                          if (user != null) {
-                            setState(() {
-                              _currentUser = user;
-                            });
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-            const SizedBox(height: 16),
-            _isSigningOut
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: () async {
-                      setState(() {
-                        _isSigningOut = true;
-                      });
-                      await FirebaseAuth.instance.signOut();
-                      setState(() {
-                        _isSigningOut = false;
-                      });
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: const Text('Sign out'),
-                  ),
-          ],
-        ),
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  'Username: ${user!.displayName}',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const Divider(),
+                const Text(
+                  'Vehicle configuration',
+                  style: TextStyle(fontSize: 24),
+                ),
+                TextField(
+                  controller: controller1,
+                  decoration: const InputDecoration(
+                      labelText: 'Time to change oil',
+                      hintText: 'How many days?',
+                      suffixIcon: Icon(CupertinoIcons.drop)),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: controller2,
+                  decoration: const InputDecoration(
+                      labelText: 'Distance to change oil',
+                      hintText: 'How many kms?',
+                      suffixIcon: Icon(CupertinoIcons.drop)),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: controller3,
+                  decoration: const InputDecoration(
+                      labelText: 'Time to maintain',
+                      hintText: 'How many days?',
+                      suffixIcon: Icon(CupertinoIcons.hammer)),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: controller4,
+                  decoration: const InputDecoration(
+                      labelText: 'Distance to maintain',
+                      hintText: 'How many kms?',
+                      suffixIcon: Icon(CupertinoIcons.hammer)),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: controller5,
+                  decoration: const InputDecoration(
+                      labelText: 'Time to refuel',
+                      hintText: 'How many days?',
+                      suffixIcon: Icon(CupertinoIcons.repeat)),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: controller6,
+                  decoration: const InputDecoration(
+                      labelText: 'Distance to refuel',
+                      hintText: 'How many kms?',
+                      suffixIcon: Icon(CupertinoIcons.repeat)),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            )),
       ),
     );
   }

@@ -62,6 +62,8 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Log In'),
+          centerTitle: true,
+          backgroundColor: primaryColor,
         ),
         body: FutureBuilder(
           future: _initializeFirebase(),
