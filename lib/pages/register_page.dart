@@ -6,14 +6,14 @@ import 'package:motor_diary/widgets/bottom_bar.dart';
 import '../utils/fire_auth.dart';
 import '../utils/validator.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();

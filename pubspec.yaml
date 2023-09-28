@@ -23,13 +23,12 @@ dependencies:
   firebase_messaging: ^14.6.8
   firebase_storage: ^11.2.6
   firebase_database: ^10.2.5
-  cloud_firestore:
   timeline_tile: ^2.0.0
   pytorch_lite:
   pytorch_mobile:
   path:
-  salomon_bottom_bar:
   flutter_local_notifications:
+  intl:
 
 dev_dependencies:
   flutter_test:

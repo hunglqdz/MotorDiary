@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/pages/forgot_password_page.dart';
-import 'package:motor_diary/pages/signup_page.dart';
+import 'package:motor_diary/pages/register_page.dart';
 import 'package:motor_diary/widgets/bottom_bar.dart';
 import 'package:motor_diary/widgets/constant.dart';
 
@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                             Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const SignupPage(),
+                                                    const RegisterPage(),
                                               ),
                                             );
                                           },

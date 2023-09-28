@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:motor_diary/models/event_model.dart';
 import 'package:motor_diary/widgets/constant.dart';
 
@@ -16,6 +17,7 @@ class _TimelinePageState extends State<TimelinePage> {
 
   final typeController = TextEditingController();
   final odoController = TextEditingController();
+  String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   List<Event> eventList = [];
 
@@ -62,7 +64,9 @@ class _TimelinePageState extends State<TimelinePage> {
                 ),
               ),
             ),
-            for (int i = 0; i < eventList.length; i++) eventWidget(eventList[i])
+            const SizedBox(height: 16),
+            for (int i = eventList.length - 1; i >= 0; i--)
+              eventWidget(eventList[i])
           ],
         ),
       ),
@@ -97,8 +101,9 @@ class _TimelinePageState extends State<TimelinePage> {
                   ElevatedButton(
                       onPressed: () {
                         Map<String, dynamic> data = {
-                          'type': typeController.text.toString(),
-                          'odo': odoController.text.toString()
+                          'type': typeController.text,
+                          'odo': odoController.text,
+                          'date': date,
                         };
 
                         dbRef.child('Events').push().set(data).then((value) {
@@ -150,6 +155,10 @@ class _TimelinePageState extends State<TimelinePage> {
                 ),
                 Text(
                   'Odometer: ${event.eventData!.odo!}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Text(
+                  'Date: $date',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
