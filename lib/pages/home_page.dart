@@ -12,17 +12,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final User? user = FirebaseAuth.instance.currentUser;
-  final dbRef = FirebaseDatabase.instance.ref();
-  String latestOdo = '0';
+
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref('Events');
+
+  String lastDate = '';
+  String lastOdo = '';
 
   @override
   void initState() {
     super.initState();
-    getLatestOdo();
+    getLastDate();
+    getLastOdo();
   }
 
-  void getLatestOdo() {
-    dbRef;
+  getLastDate() {
+    dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
+      final data = event.snapshot.value;
+      setState(() {
+        lastDate = data.toString();
+      });
+    });
+  }
+
+  getLastOdo() {
+    dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
+      final data = event.snapshot.value;
+      setState(() {
+        lastOdo = data.toString();
+      });
+    });
   }
 
   @override
@@ -68,28 +86,23 @@ class _HomePageState extends State<HomePage> {
                   border: Border.all(color: primaryColor, width: 2),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 20),
                       child: Text(
                         'Last Record',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text('Date: '),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text('Odo: 12345'),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text('Date: $lastDate'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text('Odo: $lastOdo'),
                     )
                   ],
                 ),
@@ -114,18 +127,13 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text('Date: ???'),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text('Odo: ???'),
-                        )
-                      ],
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('Date: ???'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('Odo: ???'),
                     )
                   ],
                 ),

@@ -22,6 +22,17 @@ class _ProfilePageState extends State<ProfilePage> {
   final controller6 = TextEditingController();
 
   @override
+  void dispose() {
+    controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    controller4.dispose();
+    controller5.dispose();
+    controller6.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(

@@ -13,7 +13,7 @@ class TimelinePage extends StatefulWidget {
 }
 
 class _TimelinePageState extends State<TimelinePage> {
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref('Events');
 
   final typeController = TextEditingController();
   final odoController = TextEditingController();
@@ -27,6 +27,13 @@ class _TimelinePageState extends State<TimelinePage> {
   void initState() {
     super.initState();
     retrieveEventData();
+  }
+
+  @override
+  void dispose() {
+    typeController.dispose();
+    odoController.dispose();
+    super.dispose();
   }
 
   @override
@@ -106,7 +113,7 @@ class _TimelinePageState extends State<TimelinePage> {
                           'date': date,
                         };
 
-                        dbRef.child('Events').push().set(data).then((value) {
+                        dbRef.push().set(data).then((value) {
                           Navigator.of(context).pop();
                         });
                       },
@@ -119,7 +126,7 @@ class _TimelinePageState extends State<TimelinePage> {
   }
 
   void retrieveEventData() {
-    dbRef.child('Events').onChildAdded.listen((data) {
+    dbRef.onChildAdded.listen((data) {
       EventData eventData = EventData.fromJson(data.snapshot.value as Map);
       Event event = Event(key: data.snapshot.key, eventData: eventData);
       eventList.add(event);
@@ -165,7 +172,7 @@ class _TimelinePageState extends State<TimelinePage> {
             ),
             InkWell(
               onTap: () {
-                dbRef.child('Events').child(event.key!).remove().then((value) {
+                dbRef.child(event.key!).remove().then((value) {
                   int index = eventList
                       .indexWhere((element) => element.key == event.key!);
                   eventList.removeAt(index);

@@ -17,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   bool enableNotifications = true;
-  String? selectedNumOfRecords;
+  String selectedNumOfRecords = '5';
   final List<String> numOfRecords = ['5', '10', '15'];
 
   signOut() async {
@@ -119,7 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
           iconEnabledColor: iconEnabledColor,
           onChanged: (String? newValue) {
             setState(() {
-              selectedNumOfRecords = newValue;
+              selectedNumOfRecords = newValue!;
             });
           },
           items: numOfRecords

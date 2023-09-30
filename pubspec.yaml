@@ -29,6 +29,7 @@ dependencies:
   path:
   flutter_local_notifications:
   intl:
+  http:
 
 dev_dependencies:
   flutter_test:
