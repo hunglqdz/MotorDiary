@@ -13,25 +13,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final User? user = FirebaseAuth.instance.currentUser;
 
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref('Events');
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
   String lastDate = '';
   String lastOdo = '';
 
-  @override
-  void initState() {
-    super.initState();
-    getLastDate();
-    getLastOdo();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getLastDate();
+  //   getLastOdo();
+  // }
 
-  getLastDate() {
-    dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
-      final data = event.snapshot.value;
-      setState(() {
-        lastDate = data.toString();
-      });
-    });
+  Future<Object?> getLastData() async {
+    DataSnapshot snapshot = (await dbRef.limitToLast(1).once()) as DataSnapshot;
+    if (snapshot.value != null) {
+      final Object? data = snapshot.value;
+      return data;
+    } else {
+      return null;
+    }
   }
 
   getLastOdo() {
@@ -42,6 +43,15 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
+  //
+  // getLastOdo() {
+  //   dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
+  //     final data = (event.snapshot.value as Map)['odo'];
+  //     setState(() {
+  //       lastOdo = data.toString();
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +108,41 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Text('Date: $lastDate'),
+                      child: StreamBuilder(
+                        stream: dbRef.child('date').onValue,
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData &&
+                              snapshot.data!.snapshot.value != null) {
+                            String date = snapshot.data!.snapshot.value;
+                            if (date != null) {
+                              return Text('Date: $date');
+                            } else {
+                              return const Text('No data');
+                            }
+                          } else {
+                            return const Text('Loading...');
+                          }
+                        },
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Text('Odo: $lastOdo'),
+                      child: StreamBuilder(
+                        stream: dbRef.child('odo').onValue,
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData &&
+                              snapshot.data!.snapshot.value != null) {
+                            String odo = snapshot.data!.snapshot.value;
+                            if (odo != null) {
+                              return Text('Odo: $odo');
+                            } else {
+                              return const Text('No data');
+                            }
+                          } else {
+                            return const Text('Loading...');
+                          }
+                        },
+                      ),
                     )
                   ],
                 ),

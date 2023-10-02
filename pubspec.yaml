@@ -22,7 +22,7 @@ dependencies:
   firebase_core: ^2.16.0
   firebase_messaging: ^14.6.8
   firebase_storage: ^11.2.6
-  firebase_database: ^10.2.5
+  firebase_database: ^10.2.6
   timeline_tile: ^2.0.0
   pytorch_lite:
   pytorch_mobile:
@@ -30,6 +30,7 @@ dependencies:
   flutter_local_notifications:
   intl:
   http:
+  firebase_ui_database:
 
 dev_dependencies:
   flutter_test:
