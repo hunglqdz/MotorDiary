@@ -31,6 +31,7 @@ dependencies:
   intl:
   http:
   firebase_ui_database:
+  odometer:
 
 dev_dependencies:
   flutter_test:
@@ -57,3 +58,6 @@ flutter:
           style: italic
         - asset: fonts/Montserrat-Bold.ttf
           weight: 700
+    - family: Digital-7
+      fonts:
+        - asset: fonts/digital-7 (mono).ttf

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:motor_diary/widgets/constant.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,45 +14,36 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final User? user = FirebaseAuth.instance.currentUser;
 
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref('Events');
 
   String lastDate = '';
   String lastOdo = '';
+  String date = DateFormat.yMd().format(DateTime.now());
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getLastDate();
-  //   getLastOdo();
-  // }
-
-  Future<Object?> getLastData() async {
-    DataSnapshot snapshot = (await dbRef.limitToLast(1).once()) as DataSnapshot;
-    if (snapshot.value != null) {
-      final Object? data = snapshot.value;
-      return data;
-    } else {
-      return null;
-    }
+  @override
+  void initState() {
+    super.initState();
+    getLastDate();
+    getLastOdo();
   }
 
-  getLastOdo() {
+  getLastDate() {
     dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
-      final data = event.snapshot.value;
+      final data = (event.snapshot.value as Map)['date'];
       setState(() {
         lastOdo = data.toString();
       });
     });
   }
-  //
-  // getLastOdo() {
-  //   dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
-  //     final data = (event.snapshot.value as Map)['odo'];
-  //     setState(() {
-  //       lastOdo = data.toString();
-  //     });
-  //   });
-  // }
+
+  getLastOdo() {
+    dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
+      final data = (event.snapshot.value as Map)['odo'];
+      setState(() {
+        lastOdo = data.toString();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,42 +99,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: StreamBuilder(
-                        stream: dbRef.child('date').onValue,
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData &&
-                              snapshot.data!.snapshot.value != null) {
-                            String date = snapshot.data!.snapshot.value;
-                            if (date != null) {
-                              return Text('Date: $date');
-                            } else {
-                              return const Text('No data');
-                            }
-                          } else {
-                            return const Text('Loading...');
-                          }
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: StreamBuilder(
-                        stream: dbRef.child('odo').onValue,
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData &&
-                              snapshot.data!.snapshot.value != null) {
-                            String odo = snapshot.data!.snapshot.value;
-                            if (odo != null) {
-                              return Text('Odo: $odo');
-                            } else {
-                              return const Text('No data');
-                            }
-                          } else {
-                            return const Text('Loading...');
-                          }
-                        },
-                      ),
+                        padding: const EdgeInsets.all(16),
+                        child: Text('Date: $date')),
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('Odo: '),
                     )
                   ],
                 ),
