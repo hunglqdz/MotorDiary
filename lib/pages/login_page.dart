@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             decoration: InputDecoration(
                               hintText: "Email",
+                              hintStyle: const TextStyle(color: Colors.grey),
                               errorBorder: UnderlineInputBorder(
                                 borderRadius: BorderRadius.circular(6),
                                 borderSide: const BorderSide(
@@ -107,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             decoration: InputDecoration(
                               hintText: "Password",
+                              hintStyle: const TextStyle(color: Colors.grey),
                               errorBorder: UnderlineInputBorder(
                                 borderRadius: BorderRadius.circular(6),
                                 borderSide: const BorderSide(

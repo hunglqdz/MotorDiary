@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/widgets/bottom_bar.dart';
+import 'package:motor_diary/widgets/constant.dart';
 
 import '../utils/fire_auth.dart';
 import '../utils/validator.dart';
@@ -45,6 +46,8 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Sign Up'),
+          centerTitle: true,
+          backgroundColor: primaryColor,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -66,6 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           hintText: "Name",
+                          hintStyle: const TextStyle(color: Colors.grey),
                           errorBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
                             borderSide: const BorderSide(
@@ -83,6 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           hintText: "Email",
+                          hintStyle: const TextStyle(color: Colors.grey),
                           errorBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
                             borderSide: const BorderSide(
@@ -101,6 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         decoration: InputDecoration(
                           hintText: "Password",
+                          hintStyle: const TextStyle(color: Colors.grey),
                           errorBorder: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
                             borderSide: const BorderSide(
