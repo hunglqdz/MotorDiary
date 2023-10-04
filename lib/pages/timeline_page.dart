@@ -18,7 +18,7 @@ class _TimelinePageState extends State<TimelinePage> {
 
   final _typeController = TextEditingController();
   final _odoController = TextEditingController();
-  String date = DateFormat.yMd().format(DateTime.now());
+  String date = DateFormat.yMMMMd().format(DateTime.now());
 
   List<Event> eventList = [];
 
@@ -169,22 +169,70 @@ class _TimelinePageState extends State<TimelinePage> {
                       style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(width: 20),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      height: 30,
-                      color: Colors.black,
-                      child: AnimatedSlideOdometerNumber(
-                        odometerNumber:
-                            OdometerNumber(int.parse(event.eventData!.odo!)),
-                        duration: Duration.zero,
-                        letterWidth: 20,
-                        numberTextStyle: const TextStyle(
-                          fontFamily: 'Digital-7',
-                          fontSize: 20,
-                          color: Colors.white,
+                    Stack(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              color: Colors.black,
+                              width: 17,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.white,
+                              width: 2,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.black,
+                              width: 17,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.white,
+                              width: 2,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.black,
+                              width: 17,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.white,
+                              width: 2,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.black,
+                              width: 17,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.white,
+                              width: 2,
+                              height: 25,
+                            ),
+                            Container(
+                              color: Colors.black,
+                              width: 17,
+                              height: 25,
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
+                        AnimatedSlideOdometerNumber(
+                          numberTextStyle: const TextStyle(
+                            fontSize: 25,
+                            fontFamily: 'Digital-7',
+                            color: Colors.white,
+                          ),
+                          odometerNumber:
+                              OdometerNumber(int.parse(event.eventData!.odo!)),
+                          duration: Duration.zero,
+                          letterWidth: 20,
+                        )
+                      ],
+                    )
                   ],
                 ),
                 Text(

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:motor_diary/widgets/constant.dart';
+import 'package:odometer/odometer.dart';
+
+import '../models/event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,31 +18,22 @@ class _HomePageState extends State<HomePage> {
 
   DatabaseReference dbRef = FirebaseDatabase.instance.ref('Events');
 
-  String lastDate = '';
-  String lastOdo = '';
-  String date = DateFormat.yMd().format(DateTime.now());
+  String date = '';
+  String odo = '';
 
   @override
   void initState() {
     super.initState();
-    getLastDate();
-    getLastOdo();
+    retrieveEventData();
   }
 
-  getLastDate() {
-    dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
-      final data = (event.snapshot.value as Map)['date'];
+  void retrieveEventData() {
+    dbRef.onChildAdded.listen((data) {
+      EventData eventData = EventData.fromJson(data.snapshot.value as Map);
+      Event event = Event(key: data.snapshot.key, eventData: eventData);
       setState(() {
-        lastOdo = data.toString();
-      });
-    });
-  }
-
-  getLastOdo() {
-    dbRef.orderByKey().limitToLast(1).onValue.listen((event) {
-      final data = (event.snapshot.value as Map)['odo'];
-      setState(() {
-        lastOdo = data.toString();
+        date = event.eventData!.date!;
+        odo = event.eventData!.odo!;
       });
     });
   }
@@ -99,12 +92,87 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text('Date: $date')),
-                    const Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text('Odo: '),
-                    )
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        'Date: $date',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Odometer:',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          const SizedBox(width: 20),
+                          Stack(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    color: Colors.black,
+                                    width: 17,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    width: 2,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.black,
+                                    width: 17,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    width: 2,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.black,
+                                    width: 17,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    width: 2,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.black,
+                                    width: 17,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    width: 2,
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    color: Colors.black,
+                                    width: 17,
+                                    height: 25,
+                                  ),
+                                ],
+                              ),
+                              AnimatedSlideOdometerNumber(
+                                numberTextStyle: const TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Digital-7',
+                                  color: Colors.white,
+                                ),
+                                odometerNumber: OdometerNumber(int.parse(odo)),
+                                duration: Duration.zero,
+                                letterWidth: 20,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
