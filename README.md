@@ -1,21 +1,39 @@
-# Motor Diary
-***
-A Flutter mobile application that users can manage the fuel consumption as well as the date of maintenance and changing oil via the odometer's change.
-## Table of Contents
-1. [General Info](#general-info)
-2. [Technologies](#technologies)
-3. [Installation](#installation)
-### General Info
-***
-Write down general information about your project.
-### Screenshot
+## Motor Diary
 
-### Technologies
-***
-A list of technologies used within the project:
-* Flutter
-* Dart language
-* Visual Studio Code
+### Description
+
+Motor Diary is a simple management app that allows users to manage their private vehicles.
+
+### Features
+
+* Capture images of odometer
+* Detect odometer numbers
+* Predict and notify
+
+### Requirements
+
+* Android 4.4 or higher
+* iOS 11 or higher
+
 ### Installation
-***
-Very easy! Just go to CH Play or App Store and get what you want!
+
+1. Download the app from the Google Play Store or the App Store.
+2. Open the app and create an account or sign in with your existing account.
+
+### Usage
+
+To capture images, tap the button that has camera icon in the bottom right corner of the screen.
+
+If the app cannot detect odometer numbers, users can add events manually.
+
+To update an event, tap on the event in the list, modify info and then tap the "Save" button.
+
+To delete an event, tap on the event in the list and then tap the "Delete" button.
+
+### Contributing
+
+If you would like to contribute to Motor Diary, please fork the repository on GitHub and submit a pull request.
+
+### Screenshots
+
+
