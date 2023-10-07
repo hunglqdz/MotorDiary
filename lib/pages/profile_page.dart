@@ -60,6 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const InputDecoration(
                       labelText: 'Time to change oil',
                       hintText: 'How many days?',
+                      hintStyle: TextStyle(color: Colors.grey),
                       suffixIcon: Icon(CupertinoIcons.drop)),
                   keyboardType: TextInputType.number,
                 ),
@@ -68,6 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const InputDecoration(
                       labelText: 'Distance to change oil',
                       hintText: 'How many kms?',
+                      hintStyle: TextStyle(color: Colors.grey),
                       suffixIcon: Icon(CupertinoIcons.drop)),
                   keyboardType: TextInputType.number,
                 ),
@@ -76,6 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const InputDecoration(
                       labelText: 'Time to maintain',
                       hintText: 'How many days?',
+                      hintStyle: TextStyle(color: Colors.grey),
                       suffixIcon: Icon(CupertinoIcons.hammer)),
                   keyboardType: TextInputType.number,
                 ),
@@ -84,6 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const InputDecoration(
                       labelText: 'Distance to maintain',
                       hintText: 'How many kms?',
+                      hintStyle: TextStyle(color: Colors.grey),
                       suffixIcon: Icon(CupertinoIcons.hammer)),
                   keyboardType: TextInputType.number,
                 ),
@@ -92,6 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const InputDecoration(
                       labelText: 'Time to refuel',
                       hintText: 'How many days?',
+                      hintStyle: TextStyle(color: Colors.grey),
                       suffixIcon: Icon(CupertinoIcons.repeat)),
                   keyboardType: TextInputType.number,
                 ),
@@ -100,6 +105,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   decoration: const InputDecoration(
                       labelText: 'Distance to refuel',
                       hintText: 'How many kms?',
+                      hintStyle: TextStyle(color: Colors.grey),
                       suffixIcon: Icon(CupertinoIcons.repeat)),
                   keyboardType: TextInputType.number,
                 ),

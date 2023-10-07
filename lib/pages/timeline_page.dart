@@ -18,7 +18,6 @@ class _TimelinePageState extends State<TimelinePage> {
 
   final _typeController = TextEditingController();
   final _odoController = TextEditingController();
-  String date = DateFormat.yMMMMd().format(DateTime.now());
 
   List<Event> eventList = [];
 
@@ -111,7 +110,7 @@ class _TimelinePageState extends State<TimelinePage> {
                       Map<String, dynamic> data = {
                         'type': _typeController.text,
                         'odo': _odoController.text,
-                        'date': date,
+                        'date': DateFormat.yMMMMd().format(DateTime.now()),
                       };
 
                       dbRef.push().set(data).then((value) {
@@ -236,7 +235,7 @@ class _TimelinePageState extends State<TimelinePage> {
                   ],
                 ),
                 Text(
-                  'Date: $date',
+                  'Date: ${event.eventData!.date!}',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
