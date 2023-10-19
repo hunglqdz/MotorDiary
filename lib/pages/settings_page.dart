@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/pages/login_page.dart';
 import 'package:motor_diary/pages/profile_page.dart';
-import 'package:motor_diary/widgets/constant.dart';
+import 'package:motor_diary/services/auth/auth_service.dart';
+
+import '../constants/routes.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -13,22 +13,26 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final User? user = FirebaseAuth.instance.currentUser;
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  String get userEmail => AuthService.firebase().currentUser!.email;
 
   bool enableNotifications = true;
   String selectedNumOfRecords = '5';
   final List<String> numOfRecords = ['5', '10', '15'];
 
   signOut() async {
-    await auth.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+    await AuthService.firebase().logOut();
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      loginRoute,
+      (_) => false,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Center(
@@ -41,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     _CustomListTile(
                       title: const Text("Notifications"),
-                      icon: Icon(CupertinoIcons.bell, color: primaryColor),
+                      icon: const Icon(CupertinoIcons.bell),
                       trailing: Switch(
                           value: enableNotifications,
                           onChanged: (value) {
@@ -59,14 +63,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     _CustomListTile(
                       title: const Text("Profile"),
-                      icon: Icon(CupertinoIcons.person, color: primaryColor),
+                      icon: const Icon(CupertinoIcons.person),
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProfilePage(
-                                user: user,
-                              ),
+                              builder: (context) => const ProfilePage(),
                             ));
                       },
                       subtitle: '',
@@ -74,9 +76,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     _CustomListTile(
                       title: const Text("Predictor"),
                       subtitle: 'Number of records for prediction',
-                      icon: Icon(
+                      icon: const Icon(
                         CupertinoIcons.gauge,
-                        color: primaryColor,
                       ),
                       trailing: dropDown(),
                     ),

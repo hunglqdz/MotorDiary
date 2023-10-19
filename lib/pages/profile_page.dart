@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/widgets/constant.dart';
 
 class ProfilePage extends StatefulWidget {
-  final User? user;
-
-  const ProfilePage({super.key, required this.user});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -39,7 +36,6 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: const Text('Profile'),
         centerTitle: true,
-        backgroundColor: primaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(

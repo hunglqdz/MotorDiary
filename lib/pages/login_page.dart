@@ -1,14 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motor_diary/pages/forgot_password_page.dart';
-import 'package:motor_diary/pages/register_page.dart';
-import 'package:motor_diary/widgets/bottom_bar.dart';
-import 'package:motor_diary/widgets/constant.dart';
+import 'package:motor_diary/constants/routes.dart';
+import 'package:motor_diary/services/auth/auth_exceptions.dart';
+import 'package:motor_diary/services/auth/auth_service.dart';
 
-import '../utils/fire_auth.dart';
-import '../utils/validator.dart';
+import '../utilities/dialogs/error_dialog.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,200 +13,100 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _email;
+  late final TextEditingController _password;
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  final _focusEmail = FocusNode();
-  final _focusPassword = FocusNode();
-
-  bool _isProcessing = false;
-
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const BottomBar(),
-        ),
-      );
-    }
-
-    return firebaseApp;
+  @override
+  void initState() {
+    _email = TextEditingController();
+    _password = TextEditingController();
+    super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _email.dispose();
+    _password.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusEmail.unfocus();
-        _focusPassword.unfocus();
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Log In'),
-          centerTitle: true,
-          backgroundColor: primaryColor,
-        ),
-        body: FutureBuilder(
-          future: _initializeFirebase(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset('assets/icon/icon.png',
-                        width: 150, height: 150),
-                    const SizedBox(height: 5),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: _emailController,
-                            focusNode: _focusEmail,
-                            validator: (value) => Validator.validateEmail(
-                              email: value,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "Email",
-                              hintStyle: const TextStyle(color: Colors.grey),
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          TextFormField(
-                            controller: _passwordController,
-                            focusNode: _focusPassword,
-                            obscureText: true,
-                            validator: (value) => Validator.validatePassword(
-                              password: value,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle: const TextStyle(color: Colors.grey),
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          _isProcessing
-                              ? const CircularProgressIndicator()
-                              : Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: ElevatedButton.icon(
-                                            onPressed: () async {
-                                              _focusEmail.unfocus();
-                                              _focusPassword.unfocus();
-
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                setState(() {
-                                                  _isProcessing = true;
-                                                });
-
-                                                User? user = await FireAuth
-                                                    .signInUsingEmailPassword(
-                                                  email: _emailController.text,
-                                                  password:
-                                                      _passwordController.text,
-                                                );
-
-                                                setState(() {
-                                                  _isProcessing = false;
-                                                });
-
-                                                if (user != null) {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const BottomBar(),
-                                                    ),
-                                                  );
-                                                }
-                                              }
-                                            },
-                                            label: const Text('Log In'),
-                                            icon: const Icon(
-                                                CupertinoIcons.lock_open),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        const Text('New user?'),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const RegisterPage(),
-                                              ),
-                                            );
-                                          },
-                                          child: Text(
-                                            'Sign Up',
-                                            style:
-                                                TextStyle(color: primaryColor),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ForgotPasswordPage(),
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
-                                        'Forgot Password',
-                                        style: TextStyle(color: primaryColor),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
+      body: FutureBuilder(
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
+              return Column(
+                children: [
+                  TextField(
+                    controller: _email,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your email here',
+                    ),
+                  ),
+                  TextField(
+                    controller: _password,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your password here',
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      final email = _email.text;
+                      final password = _password.text;
+                      try {
+                        await AuthService.firebase().logIn(
+                          email: email,
+                          password: password,
+                        );
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          mainRoute,
+                          (route) => false,
+                        );
+                      } on UserNotFoundAuthException {
+                        await showErrorDialog(
+                          context,
+                          'User not found',
+                        );
+                      } on WrongPasswordAuthException {
+                        await showErrorDialog(
+                          context,
+                          'Wrong credentials',
+                        );
+                      } on GenericAuthException {
+                        await showErrorDialog(
+                          context,
+                          'Authentication error',
+                        );
+                      }
+                    },
+                    child: const Text('Login'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        registerRoute,
+                        (route) => false,
+                      );
+                    },
+                    child: const Text('Not registered yet? Register here!'),
+                  )
+                ],
               );
-            }
-
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+            default:
+              return const CircularProgressIndicator();
+          }
+        },
       ),
     );
   }

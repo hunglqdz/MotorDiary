@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motor_diary/pages/login_page.dart';
-import 'package:motor_diary/widgets/constant.dart';
+import 'package:motor_diary/pages/register_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const route = '/welcome-screen';
@@ -25,20 +24,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Column(
               children: [
                 Text(
                   'Motor Diary',
                   style: TextStyle(
-                    color: primaryColor,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 30),
-                const Text(
+                SizedBox(height: 30),
+                Text(
                   'Welcome user!',
                   style: TextStyle(fontSize: 20),
                 ),
@@ -59,20 +57,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Column(
               children: [
                 Text(
                   'Manage your vehicle',
                   style: TextStyle(
-                    color: primaryColor,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 30),
-                const Text(
+                SizedBox(height: 30),
+                Text(
                   'Just capture the odometer!',
                   style: TextStyle(fontSize: 20),
                 ),
@@ -93,20 +90,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Column(
               children: [
                 Text(
                   'Stay up-to-date',
                   style: TextStyle(
-                    color: primaryColor,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 30),
-                const Text(
+                SizedBox(height: 30),
+                Text(
                   'Never miss important events!',
                   style: TextStyle(fontSize: 20),
                 ),
@@ -158,11 +154,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: const EdgeInsets.all(16),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Perform action when the button is pressed
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
+                            builder: (context) => const RegisterPage()));
                   },
                   child: const Text('Get Started'),
                 ),
@@ -182,7 +177,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         shape: BoxShape.rectangle,
-        color: _currentPage == index ? primaryColor : accentColor,
+        color: _currentPage == index ? Colors.green : Colors.grey,
       ),
     );
   }

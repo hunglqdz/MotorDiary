@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motor_diary/pages/settings_page.dart';
-import 'package:motor_diary/widgets/constant.dart';
 
 import '../pages/home_page.dart';
 import '../pages/timeline_page.dart';
@@ -50,11 +49,11 @@ class _BottomBarState extends State<BottomBar> {
                         currentTab == 0
                             ? CupertinoIcons.house_fill
                             : CupertinoIcons.house,
-                        color: currentTab == 0 ? primaryColor : Colors.black),
+                        color: currentTab == 0 ? Colors.green : Colors.black),
                     Text(
                       'Home',
                       style: TextStyle(
-                          color: currentTab == 0 ? primaryColor : Colors.black),
+                          color: currentTab == 0 ? Colors.green : Colors.black),
                     ),
                   ],
                 ),
@@ -75,11 +74,11 @@ class _BottomBarState extends State<BottomBar> {
                         currentTab == 1
                             ? CupertinoIcons.list_dash
                             : CupertinoIcons.list_bullet,
-                        color: currentTab == 1 ? primaryColor : Colors.black),
+                        color: currentTab == 1 ? Colors.green : Colors.black),
                     Text(
                       'Timeline',
                       style: TextStyle(
-                          color: currentTab == 1 ? primaryColor : Colors.black),
+                          color: currentTab == 1 ? Colors.green : Colors.black),
                     ),
                   ],
                 ),
@@ -100,11 +99,11 @@ class _BottomBarState extends State<BottomBar> {
                         currentTab == 2
                             ? CupertinoIcons.gear_alt_fill
                             : CupertinoIcons.gear_alt,
-                        color: currentTab == 2 ? primaryColor : Colors.black),
+                        color: currentTab == 2 ? Colors.green : Colors.black),
                     Text(
                       'Settings',
                       style: TextStyle(
-                          color: currentTab == 2 ? primaryColor : Colors.black),
+                          color: currentTab == 2 ? Colors.green : Colors.black),
                     ),
                   ],
                 ),
